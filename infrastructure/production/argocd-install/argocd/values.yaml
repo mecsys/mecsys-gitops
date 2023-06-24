@@ -45,7 +45,7 @@ server:
       type: RuntimeDefault
   ingress:
     enabled: true
-    ingressClassName: "public"
+    ingressClassName: "nginx"
     labels: {}
     annotations:
       kubernetes.io/ingress.class: "nginx"
