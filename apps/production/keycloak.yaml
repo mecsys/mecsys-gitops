@@ -20,7 +20,7 @@ spec:
       helm:
         releaseName: keycloak
         valueFiles:          
-          - $values/helm/services/mecsys/production/values.yaml
+          - $values/helm/services/mecsys/production/keycloak/values.yaml
     - ref: values
       repoURL: git@github.com:mecsys/mecsys-stacks.git
       targetRevision: main
