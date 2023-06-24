@@ -20,7 +20,7 @@ applications:
     server: https://kubernetes.default.svc
   name: argocd-app-of-appprojects
   namespace: argocd
-  project: infra
+  project: default
   source:
     directory:
       recurse: true
