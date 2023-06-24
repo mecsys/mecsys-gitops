@@ -1,2 +1,1 @@
 # mecsys-gitops
-# mecsys-gitops
