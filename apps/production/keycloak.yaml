@@ -24,7 +24,4 @@ spec:
     - ref: values
       repoURL: git@github.com:mecsys/mecsys-stacks.git
       targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  syncPolicy: {}
