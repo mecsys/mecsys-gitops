@@ -10,7 +10,7 @@ metadata:
     notifications.argoproj.io/subscribe.on-sync-succeeded.slack_webhook_openx: '#gitops-new-industries'
 spec:
   destination:
-    namespace: argocd
+    namespace: keycloak
     server: https://kubernetes.default.svc
   project: apps
   sources:
