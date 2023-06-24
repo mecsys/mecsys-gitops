@@ -1,0 +1,331 @@
+configs:
+  cm:
+    create: true
+    admin.enabled: true
+    annotations: {}
+    application.instanceLabelKey: argocd.argoproj.io/instance    
+    exec.enabled: false
+    server.rbac.log.enforce.enable: false
+    timeout.hard.reconciliation: 0s
+    timeout.reconciliation: 180s
+    url: "https://cd.mecsys.com.br"
+  secret:
+    createSecret: true
+  cmp:    
+    create: false
+    annotations: {}
+    plugins: {}
+  repositories:
+    repo-ops-mecsys:
+      name: ops-mecsys
+      type: git
+      url: git@github.com:mecsys/mecsys-gitops.git
+
+server:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  replicas: 1
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "100m"
+    limits:
+      memory: "128Mi"
+      cpu: "200m"
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  ingress:
+    enabled: true
+    ingressClassName: ""
+    labels: {}
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      cert-manager.io/cluster-issuer: "letsencrypt"
+    extraPaths: []
+    hosts:      
+      - cd.mecsys.com.br
+    pathType: Prefix
+    paths:
+    - /
+    https: true
+    tls:
+      - hosts:
+          - cd.mecsys.com.br
+        secretName: cd-mecsys-com-br-tls
+
+controller:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  replicas: 1
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "768Mi"
+      cpu: "200m"
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+
+####################################################
+# Business Logic Sensedia (AWS KMS + Helm secrets) #
+####################################################
+
+repoServer:
+  serviceAccount:
+    create: true
+    name: "argocd-repo-server"
+    annotations: {}
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  replicas: 1
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "200m"
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  env:
+    - name: HELM_PLUGINS
+      value: /custom-tools/helm-plugins/
+    - name: HELM_SECRETS_SOPS_PATH
+      value: /custom-tools/sops
+    - name: HELM_SECRETS_VALS_PATH
+      value: /custom-tools/vals
+    - name: HELM_SECRETS_KUBECTL_PATH
+      value: /custom-tools/kubectl
+    - name: HELM_SECRETS_CURL_PATH
+      value: /custom-tools/curl
+    - name: HELM_SECRETS_BACKEND
+      value: "sops" # or vals
+    # https://github.com/jkroepke/helm-secrets/wiki/Security-in-shared-environments
+    - name: HELM_SECRETS_VALUES_ALLOW_SYMLINKS
+      value: "false"
+    - name: HELM_SECRETS_VALUES_ALLOW_ABSOLUTE_PATH
+      value: "true"
+    - name: HELM_SECRETS_VALUES_ALLOW_PATH_TRAVERSAL
+      value: "false"
+    - name: HELM_SECRETS_WRAPPER_ENABLED
+      value: "true"
+    - name: HELM_SECRETS_HELM_PATH
+      value: /usr/local/bin/helm
+  volumes:
+    - name: custom-tools
+      emptyDir: {}
+  volumeMounts:
+    - mountPath: /custom-tools
+      name: custom-tools
+    - mountPath: /usr/local/sbin/helm
+      subPath: helm
+      name: custom-tools
+
+#########################################################
+# Core Business Logic Sensedia (AWS KMS + Helm secrets) #
+#########################################################
+  initContainers:
+    - name: download-tools
+      image: alpine:latest
+      command: [sh, -ec]
+      env:
+        - name: HELM_SECRETS_VERSION
+          value: "4.3.0"
+        - name: KUBECTL_VERSION
+          value: "1.23.1"
+        - name: VALS_VERSION
+          value: "0.22.0"
+        - name: SOPS_VERSION
+          value: "3.7.3"
+        - name: HELM_SECRETS_HELM_PATH
+          value: /usr/local/bin/helm
+      args:
+        - |
+          mkdir -p /custom-tools/helm-plugins
+          wget -qO- https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_SECRETS_VERSION}/helm-secrets.tar.gz | tar -C /custom-tools/helm-plugins -xzf-;
+
+          wget -qO /custom-tools/sops https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux
+          wget -qO /custom-tools/kubectl https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+
+          wget -qO- https://github.com/helmfile/vals/releases/download/v${VALS_VERSION}/vals_${VALS_VERSION}_linux_amd64.tar.gz | tar -xzf- -C /custom-tools/ vals;
+
+          printf '#!/usr/bin/env sh\nif [ "${HELM_SECRETS_WRAPPER_ENABLED}" = "true" ]; then exec %s secrets "$@"; fi\nexec %s "$@"' "${HELM_SECRETS_HELM_PATH}" "helm" >"/custom-tools/helm" && chmod +x "/custom-tools/helm"
+          
+          chmod +x /custom-tools/*
+      volumeMounts:
+        - mountPath: /custom-tools
+          name: custom-tools
+
+notifications:
+  enabled: true
+  argocdUrl: "https://cd.mecsys.com.br"
+  cm:
+    create: true
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  replicas: 1
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "100m"
+    limits:
+      memory: "128Mi"
+      cpu: "200m"
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  notifiers:
+    service.webhook.slack_webhook_openx: |
+      url: $slack-slack_webhook_openx
+      headers:
+      - name: Content-Type
+        value: application/json
+  templates:
+    template.app-deployed: |
+      message: |
+        {{if eq .serviceType "slack"}}:white_check_mark:{{end}} Application {{.app.metadata.name}} is now running new version of deployments manifests.
+    template.app-health-degraded: |
+      message: |
+        {{if eq .serviceType "slack"}}:exclamation:{{end}} Application {{.app.metadata.name}} has degraded.
+        Application details: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}.
+    template.app-sync-failed: |
+      message: |
+        {{if eq .serviceType "slack"}}:exclamation:{{end}}  The sync operation of application {{.app.metadata.name}} has failed at {{.app.status.operationState.finishedAt}} with the following error: {{.app.status.operationState.message}}
+        Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .
+    template.app-sync-succeeded: |
+      message: |
+        {{if eq .serviceType "slack"}}:white_check_mark:{{end}} Application {{.app.metadata.name}} has been successfully synced at {{.app.status.operationState.finishedAt}}.
+        Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .
+    template.send-slack-openx: |
+      webhook:
+        slack_webhook_openx:
+          method: POST
+          body: |
+            {
+              "channel": "#gitops-new-industries",
+              "attachments": [{
+                "title": "{{ .app.metadata.name}}",
+                "title_link":"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+                "color": "#18be52",
+                "fields": [
+                {
+                  "title": "Sync Status",
+                  "value": "{{.app.status.sync.status}}",
+                  "short": true
+                },
+                {
+                  "title": "Healthy Status",
+                  "value": "{{.app.status.health.status}}",
+                  "short": false
+                },
+                {
+                  "title": "Release Version",
+                  "value": "{{.app.status.summary.images}}",
+                  "short": false
+                },
+                {
+                  "title": "Helm Revision",
+                  "value": "{{.app.status.sync.revisions}}",
+                  "short": false
+                }
+                {{range $index, $c := .app.status.conditions}}
+                {{if not $index}},{{end}}
+                {{if $index}},{{end}}
+                {
+                  "title": "{{$c.type}}",
+                  "value": "{{$c.message}}",
+                  "short": true
+                }
+                {{end}}
+                ]
+              }]
+            }
+  triggers:
+    trigger.on-deployed: |
+      - description: Application is synced and healthy. Triggered once per commit.
+        oncePer: app.status.sync.revision
+        send:
+        - app-deployed
+        - send-slack-openx
+        when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
+    trigger.on-health-degraded: |
+      - description: Application has degraded
+        send:
+        - app-health-degraded
+        - send-slack-openx
+        when: app.status.health.status == 'Degraded'
+    trigger.on-sync-failed: |
+      - description: Application syncing has failed
+        send:
+        - app-sync-failed
+        - send-slack-openx
+        when: app.status.operationState.phase in ['Error', 'Failed']
+    trigger.on-sync-succeeded: |
+      - description: Application syncing has succeeded
+        send:
+        - app-sync-succeeded
+        - send-slack-openx
+        when: app.status.operationState.phase in ['Succeeded']
+
+redis:
+  enabled: true
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  replicas: 1
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "100m"
+    limits:
+      memory: "128Mi"
+      cpu: "200m"
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+
+applicationSet:
+  enabled: false
+
+dex:
+  enabled: false
