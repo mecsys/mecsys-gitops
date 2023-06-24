@@ -16,10 +16,14 @@ configs:
     annotations: {}
     plugins: {}
   repositories:
-    repo-ops-mecsys:
-      name: ops-mecsys
+    repo-ops-mecsys-gitops:
+      name: ops-mecsys-gitops
       type: git
       url: git@github.com:mecsys/mecsys-gitops.git
+    repo-ops-mecsys-stacks:
+      name: ops-mecsys-stacks
+      type: git
+      url: git@github.com:mecsys/mecsys-stacks.git
 
 server:
   metrics:
