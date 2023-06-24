@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: production-argocd-helm
+  namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-deployed.slack_webhook_openx: '#gitops-new-industries'
+    notifications.argoproj.io/subscribe.on-health-degraded.slack_webhook_openx: '#gitops-new-industries'
+    notifications.argoproj.io/subscribe.on-sync-failed.slack_webhook_openx: '#gitops-new-industries'
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack_webhook_openx: '#gitops-new-industries'
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: infra
+  sources:
+    - chart: argo-cd
+      repoURL: https://argoproj.github.io/argo-helm
+      targetRevision: 5.34.6
+      helm:
+        releaseName: argocd
+        valueFiles:
+          - $values/infrastructure/production/argocd-install/argocd/values.yaml
+    - ref: values
+      repoURL: git@github.com:mecsys/mecsys-gitops.git
+      targetRevision: main
+  syncPolicy:
+    automated: {}

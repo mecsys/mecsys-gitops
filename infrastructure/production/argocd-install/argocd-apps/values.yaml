@@ -40,7 +40,7 @@ applications:
   source:
     directory:
       recurse: true
-    path: infrastructure/production
+    path: infrastructure/production/apps
     repoURL: git@github.com:mecsys/mecsys-gitops.git
     targetRevision: main
   syncPolicy:
