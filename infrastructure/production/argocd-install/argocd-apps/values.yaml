@@ -1,0 +1,49 @@
+applications:
+- destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  name: argocd-app-of-apps
+  namespace: argocd
+  project: argocd
+  source:
+    directory:
+      recurse: true
+    path: apps/production
+    repoURL: git@github.com:mecsys/mecsys-gitops.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+- destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  name: argocd-app-of-appprojects
+  namespace: argocd
+  project: argocd
+  source:
+    directory:
+      recurse: true
+    path: projects/production
+    repoURL: git@github.com:mecsys/mecsys-gitops.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+- destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  name: argocd-app-of-infras
+  namespace: argocd
+  project: argocd
+  source:
+    directory:
+      recurse: true
+    path: infrastructure/production
+    repoURL: git@github.com:mecsys/mecsys-gitops.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
