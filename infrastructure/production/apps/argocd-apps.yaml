@@ -25,4 +25,7 @@ spec:
       repoURL: git@github.com:mecsys/mecsys-gitops.git
       targetRevision: main
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true
+      selfHeal: true
+
