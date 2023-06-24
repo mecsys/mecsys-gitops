@@ -1,17 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: apps
+  name: infra
   namespace: argocd
 spec:
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
   destinations:
-  - namespace: keycloak
+  - namespace: argocd
+    server: https://kubernetes.default.svc
+  - namespace: ingress-nginx
+    server: https://kubernetes.default.svc
+  - namespace: velero
     server: https://kubernetes.default.svc
   orphanedResources:
     warn: true
   sourceRepos:
-  - 'git@github.com:mecsys/mecsys-stacks.git'
-  - 'https://charts.bitnami.com/bitnami'
+  - 'git@github.com:mecsys/mecsys-gitops.git'
+  - 'https://argoproj.github.io/argo-helm'
+  - 'https://kubernetes.github.io/ingress-nginx'
+  - 'https://vmware-tanzu.github.io/helm-charts'
