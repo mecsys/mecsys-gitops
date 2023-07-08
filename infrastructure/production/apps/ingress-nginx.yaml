@@ -15,9 +15,6 @@ spec:
     server: https://kubernetes.default.svc
   project: infra
   sources:
-    - ref: values
-      repoURL: git@github.com:mecsys/mecsys-gitops.git
-      targetRevision: main
     - chart: ingress-nginx
       repoURL: https://kubernetes.github.io/ingress-nginx
       targetRevision: 4.4.2
@@ -25,6 +22,9 @@ spec:
         releaseName: ingress-nginx
         valueFiles:
           - $values/infrastructure/production/infra-values/ingress-nginx/values.yaml        
+    - ref: values
+      repoURL: git@github.com:mecsys/mecsys-gitops.git
+      targetRevision: main
   syncPolicy:
     automated:
       prune: true
