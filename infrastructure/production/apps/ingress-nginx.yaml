@@ -9,7 +9,7 @@ metadata:
     notifications.argoproj.io/subscribe.on-sync-failed.slack_webhook_openx: '#gitops-new-industries'
     notifications.argoproj.io/subscribe.on-sync-succeeded.slack_webhook_openx: '#gitops-new-industries'
     argocd-image-updater.argoproj.io/image-list: ingress-nginx=registry.k8s.io/ingress-nginx/controller:v1.5.x
-    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd-image-updater/git-creds
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
 spec:
   destination:
     namespace: ingress-nginx
