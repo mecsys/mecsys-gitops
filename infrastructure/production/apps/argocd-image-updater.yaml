@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: production-argocd-image-updater-helm
+  namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-deployed.slack_webhook_openx: '#gitops-new-industries'
+    notifications.argoproj.io/subscribe.on-health-degraded.slack_webhook_openx: '#gitops-new-industries'
+    notifications.argoproj.io/subscribe.on-sync-failed.slack_webhook_openx: '#gitops-new-industries'
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack_webhook_openx: '#gitops-new-industries'
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: infra
+  sources:
+    - chart: argocd-image-updater
+      repoURL: https://argoproj.github.io/argo-helm
+      targetRevision: 0.9.1
+      helm:
+        releaseName: argocd-image-updater
+        valueFiles:
+          - $values/infrastructure/production/infra-values/argocd-image-updater/values.yaml
+    - ref: values
+      repoURL: git@github.com:mecsys/mecsys-gitops.git
+      targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
