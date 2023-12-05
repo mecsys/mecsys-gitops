@@ -1,8 +1,0 @@
-helm:
-  parameters:
-  - name: controller.image.image
-    value: registry.k8s.io/ingress-nginx/controller
-    forcestring: true
-  - name: controller.image.tag
-    value: v1.5.2
-    forcestring: true
