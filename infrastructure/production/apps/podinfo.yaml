@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: production-ingress-nginx-helm
+  namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-deployed.slack_webhook_openx: '#gitops-new-industries'
+    notifications.argoproj.io/subscribe.on-health-degraded.slack_webhook_openx: '#gitops-new-industries'
+    notifications.argoproj.io/subscribe.on-sync-failed.slack_webhook_openx: '#gitops-new-industries'
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack_webhook_openx: '#gitops-new-industries'
+    argocd-image-updater.argoproj.io/image-list: podinfo=ghcr.io/stefanprodan/podinfo    
+    argocd-image-updater.argoproj.io/git-repository: git@github.com:mecsys/mecsys-gitops.git
+    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/write-back-target: "helmvalues:./infrastructure/production/infra-values/podinfo/values.yaml"    
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
+spec:
+  destination:
+    namespace: podinfo
+    server: https://kubernetes.default.svc
+  project: infra
+  sources:
+    - chart: podinfo
+      repoURL: https://stefanprodan.github.io/podinfo
+      targetRevision: 6.5.3
+      helm:
+        releaseName: podinfo
+        valueFiles:
+          - $values/infrastructure/production/infra-values/podinfo/values.yaml        
+    - ref: values
+      repoURL: git@github.com:mecsys/mecsys-gitops.git
+      targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
