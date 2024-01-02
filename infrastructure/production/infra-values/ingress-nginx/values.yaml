@@ -23,9 +23,9 @@ controller:
     ## for backwards compatibility consider setting the full image url via the repository value below
     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
     ## repository:
-    tag: "v1.5.1"
-    digest: sha256:4ba73c697770664c1e00e9f968de14e08f606ff961c76e5d7033a4a9c593c629
-    digestChroot: sha256:c1c091b88a6c936a83bd7b098662760a87868d12452529bad0d178fb36147345
+    tag: "v1.9.5"
+    digest: sha256:b3aba22b1da80e7acfc52b115cae1d4c687172cbf2b742d5b502419c25ff340e
+    digestChroot: sha256:9a8d7b25a846a6461cd044b9aea9cf6cad972bcf2e64d9fd246c0279979aad2d
     pullPolicy: IfNotPresent
     # www-data -> uid 101
     runAsUser: 101
@@ -592,8 +592,17 @@ controller:
   # mounted volume.
 
   opentelemetry:
-    enabled: false
-    image: registry.k8s.io/ingress-nginx/opentelemetry:v20221114-controller-v1.5.1-6-ga66ee73c5@sha256:41076fd9fb4255677c1a3da1ac3fc41477f06eba3c7ebf37ffc8f734dad51d7c
+    enabled: true
+    name: opentelemetry
+    image:
+      registry: registry.k8s.io
+      image: ingress-nginx/opentelemetry
+      ## for backwards compatibility consider setting the full image url via the repository value below
+      ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
+      ## repository:
+      tag: "v20230721-3e2062ee5"
+      digest: sha256:13bee3f5223883d3ca62fee7309ad02d22ec00ff0d7033e3e9aca7a9f60fd472
+      distroless: true
     containerSecurityContext:
       allowPrivilegeEscalation: false
 
