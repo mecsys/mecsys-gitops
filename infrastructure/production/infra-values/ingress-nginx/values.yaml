@@ -43,7 +43,19 @@ controller:
     https: 443
 
   # -- Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
-  config: {}
+  config:
+    enable-opentelemetry: "true"    
+    opentelemetry-operation-name: "HTTP $request_method $service_name $uri"
+    opentelemetry-trust-incoming-span: "true"
+    otlp-collector-host: "collector-otel-grpc-openx-stg.sensedia-eng.com"
+    otlp-collector-port: "443"
+    otel-max-queuesize: "2048"
+    otel-schedule-delay-millis: "5000"
+    otel-max-export-batch-size: "512"
+    otel-service-name: "open-x-dev-tst-ingress-nginx" # Opentelemetry resource name
+    otel-sampler: "AlwaysOn" # Also: AlwaysOff, TraceIdRatioBased
+    otel-sampler-ratio: "1.0"
+    otel-sampler-parent-based: "true"
 
   # -- Annotations to be added to the controller config configuration configmap.
   configAnnotations: {}
