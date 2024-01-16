@@ -848,7 +848,7 @@ defaultBackend:
     - name: TEMPLATE_NAME
       value: lost-in-space # one of: app-down, cats, connection, ghost, hacker-terminal, l7-dark, l7-light, lost-in-space, matrix, noise, shuffle
     - name: SHOW_DETAILS # Optional: enables the output of additional information on error pages
-      value: "false"
+      value: "true"
 
   port: 8080
 
