@@ -44,6 +44,7 @@ controller:
 
   # -- Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
   config:
+    custom-http-errors: 404,408,500,501,502,503,504,505
     enable-opentelemetry: "true"    
     opentelemetry-operation-name: "HTTP $request_method $service_name $uri"
     opentelemetry-trust-incoming-span: "true"
@@ -816,16 +817,16 @@ revisionHistoryLimit: 10
 ##
 defaultBackend:
   ##
-  enabled: false
+  enabled: true
 
   name: defaultbackend
   image:
-    registry: registry.k8s.io
-    image: defaultbackend-amd64
+    registry: ghcr.io
+    image: tarampampam/error-pages
     ## for backwards compatibility consider setting the full image url via the repository value below
     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
     ## repository:
-    tag: "1.5"
+    tag: "2.21"
     pullPolicy: IfNotPresent
     # nobody user -> uid 65534
     runAsUser: 65534
@@ -842,8 +843,12 @@ defaultBackend:
     create: true
     name: ""
     automountServiceAccountToken: true
-  # -- Additional environment variables to set for defaultBackend pods
-  extraEnvs: []
+  # -- Additional environment variables to set for defaultBackend pods  
+  extraEnvs:
+    - name: TEMPLATE_NAME
+      value: lost-in-space # one of: app-down, cats, connection, ghost, hacker-terminal, l7-dark, l7-light, lost-in-space, matrix, noise, shuffle
+    - name: SHOW_DETAILS # Optional: enables the output of additional information on error pages
+      value: "false"
 
   port: 8080
 
