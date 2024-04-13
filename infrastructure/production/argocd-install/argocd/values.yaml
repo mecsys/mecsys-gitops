@@ -2,7 +2,6 @@ global:
   image:
     repository: quay.io/argoproj/argocd
     tag: "v2.11.0-rc1"
-  domain: cd.mecsys.com.br
 
 configs:
   cm:
