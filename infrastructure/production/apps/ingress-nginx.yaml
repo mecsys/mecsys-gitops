@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: production-ingress-nginx-helm
-  namespace: argocd
+  namespace: argo-cd
   annotations:
     notifications.argoproj.io/subscribe.on-deployed.slack_webhook_openx: '#gitops-new-industries'
     notifications.argoproj.io/subscribe.on-health-degraded.slack_webhook_openx: '#gitops-new-industries'
