@@ -2,48 +2,66 @@ applications:
   argocd-app-of-apps:
     namespace: argo-cd
     project: infra
-    destination:
-      namespace: argo-cd
-      server: https://kubernetes.default.svc  
     source:
-      directory:
-        recurse: true
       path: apps/production
       repoURL: git@github.com:mecsys/mecsys-gitops.git
       targetRevision: main
+      directory:
+        recurse: true
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: argo-cd      
     syncPolicy:
       automated:
         prune: true
         selfHeal: true
+      syncOptions:
+      - CreateNamespace=true
+    additionalLabels: {}
+    additionalAnnotations: {}
+    finalizers:
+    - resources-finalizer.argocd.argoproj.io
   argocd-app-of-appprojects:  
     namespace: argo-cd
-    project: default
-    destination:
-      namespace: argo-cd
-      server: https://kubernetes.default.svc
+    project: default     
     source:
-      directory:
-        recurse: true
       path: projects/production
       repoURL: git@github.com:mecsys/mecsys-gitops.git
       targetRevision: main
+      directory:
+        recurse: true
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: argo-cd 
     syncPolicy:
       automated:
         prune: true
         selfHeal: true
-    argocd-app-of-infras:
-      destination:
-        namespace: argo-cd
-        server: https://kubernetes.default.svc  
-      namespace: argo-cd
-      project: infra
-      source:
-        directory:
-          recurse: true
-        path: infrastructure/production/apps
-        repoURL: git@github.com:mecsys/mecsys-gitops.git
-        targetRevision: main
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
+      syncOptions:
+      - CreateNamespace=true
+    additionalLabels: {}
+    additionalAnnotations: {}
+    finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  argocd-app-of-infras:    
+    namespace: argo-cd
+    project: infra
+    source:
+      path: infrastructure/production/apps
+      repoURL: git@github.com:mecsys/mecsys-gitops.git
+      targetRevision: main
+      directory:
+        recurse: true
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: argo-cd  
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+      syncOptions:
+      - CreateNamespace=true
+    additionalLabels: {}
+    additionalAnnotations: {}
+    finalizers:
+    - resources-finalizer.argocd.argoproj.io
