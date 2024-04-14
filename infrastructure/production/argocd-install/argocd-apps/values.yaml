@@ -1,9 +1,9 @@
 applications:
   argocd-app-of-apps:
-    namespace: argocd
+    namespace: argo-cd
     project: infra
     destination:
-      namespace: argocd
+      namespace: argo-cd
       server: https://kubernetes.default.svc  
     source:
       directory:
@@ -16,10 +16,10 @@ applications:
         prune: true
         selfHeal: true
   argocd-app-of-appprojects:  
-    namespace: argocd
+    namespace: argo-cd
     project: default
     destination:
-      namespace: argocd
+      namespace: argo-cd
       server: https://kubernetes.default.svc
     source:
       directory:
