@@ -327,7 +327,7 @@ notifications:
         when: app.status.operationState.phase in ['Succeeded']
 
 redis-ha:
-  enabled: true
+  enabled: false
 
 redis:
   enabled: true
