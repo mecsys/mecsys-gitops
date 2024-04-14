@@ -60,7 +60,7 @@ server:
     seccompProfile:
       type: RuntimeDefault
   ingress:
-    enabled: false
+    enabled: true
     ingressClassName: "nginx"
     labels: {}
     annotations:      
