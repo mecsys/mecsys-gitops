@@ -1,7 +1,7 @@
 global:
   image:
     repository: quay.io/argoproj/argocd
-    tag: "v2.10.6"
+    tag: "v2.11.0-rc1"
 
 configs:
   cm:
@@ -43,6 +43,9 @@ server:
     limits:
       memory: "128Mi"
       cpu: "200m"
+  autoscaling:
+    enabled: true
+    minReplicas: 2
   containerSecurityContext:
     allowPrivilegeEscalation: false
     capabilities:
@@ -116,6 +119,9 @@ repoServer:
     limits:
       memory: "512Mi"
       cpu: "200m"
+  autoscaling:
+    enabled: true
+    minReplicas: 2
   containerSecurityContext:
     allowPrivilegeEscalation: false
     capabilities:
