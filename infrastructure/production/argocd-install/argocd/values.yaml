@@ -319,6 +319,9 @@ notifications:
         - send-slack-openx
         when: app.status.operationState.phase in ['Succeeded']
 
+redis-ha:
+  enabled: true
+  
 redis:
   enabled: true
   metrics:
