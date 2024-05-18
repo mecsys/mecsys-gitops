@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: production-uptime-kuma-helm
+  namespace: argo-cd
+  annotations:
+    notifications.argoproj.io/subscribe.on-deployed.slack_webhook_openx: '#gitops-new-industries'
+    notifications.argoproj.io/subscribe.on-health-degraded.slack_webhook_openx: '#gitops-new-industries'
+    notifications.argoproj.io/subscribe.on-sync-failed.slack_webhook_openx: '#gitops-new-industries'
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack_webhook_openx: '#gitops-new-industries'
+spec:
+  destination:
+    namespace: uptime-kuma
+    server: https://kubernetes.default.svc
+  project: apps
+  sources:
+    - chart: uptime-kuma
+      repoURL: https://dirsigler.github.io/uptime-kuma-helm
+      targetRevision: 2.18.0
+      helm:
+        releaseName: uptime-kuma
+        valueFiles:          
+          - $values/helm/services/mecsys/production/uptime-kuma/values.yaml
+    - ref: values
+      repoURL: git@github.com:mecsys/mecsys-stacks.git
+      targetRevision: main
+  syncPolicy: {}

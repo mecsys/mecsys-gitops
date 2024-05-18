@@ -10,6 +10,8 @@ spec:
   destinations:
   - namespace: keycloak
     server: https://kubernetes.default.svc
+  - namespace: uptime-kuma
+    server: https://kubernetes.default.svc
   orphanedResources:
     warn: true
   sourceRepos:
