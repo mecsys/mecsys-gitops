@@ -11,10 +11,11 @@ metadata:
     argocd-image-updater.argoproj.io/image-list: podinfo=ghcr.io/stefanprodan/podinfo:6.5.x
     argocd-image-updater.argoproj.io/podinfo.helm.image-name: image.repository
     argocd-image-updater.argoproj.io/podinfo.helm.image-tag: image.tag
-    argocd-image-updater.argoproj.io/podinfo.force-update: "true"
-    argocd-image-updater.argoproj.io/git-repository: git@github.com:mecsys/mecsys-gitops.git
-    argocd-image-updater.argoproj.io/git-branch: main     
-    argocd-image-updater.argoproj.io/write-back-method: git:secret:argo-cd/argocd-repo-creds-ops-mecsys
+    # argocd-image-updater.argoproj.io/podinfo.force-update: "true"
+    # argocd-image-updater.argoproj.io/write-back-method: git:secret:argo-cd/argocd-repo-creds-ops-mecsys
+    argocd-image-updater.argoproj.io/write-back-method: argocd
+    # argocd-image-updater.argoproj.io/git-repository: git@github.com:mecsys/mecsys-gitops.git
+    # argocd-image-updater.argoproj.io/git-branch: main    
 spec:
   destination:
     namespace: podinfo
@@ -24,7 +25,7 @@ spec:
     - chart: podinfo
       repoURL: https://stefanprodan.github.io/podinfo
       targetRevision: 6.5.1
-      path: infrastructure/production/apps/
+      path: infrastructure/production/apps/ # this is for image updater to know where to store the .argocd-source-appName.yaml file.
       helm:
         releaseName: podinfo
         valueFiles:
