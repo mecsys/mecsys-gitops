@@ -2,11 +2,11 @@
 replicaCount: 1
 image:
   # -- Default image repository
-  repository: mecsys/argocd-image-updater
+  repository: quay.io/argoprojlabs/argocd-image-updater
   # -- Default image pull policy
   pullPolicy: Always
   # -- Overrides the image tag whose default is the chart appVersion
-  tag: "latest@sha256:6866bd15f94bd6696b57587c7f329912f40acaba5af7c9562069dbd5b66fcc83"
+  tag: "v0.13.0"
 
 # -- The deployment strategy to use to replace existing pods with new ones
 updateStrategy:
