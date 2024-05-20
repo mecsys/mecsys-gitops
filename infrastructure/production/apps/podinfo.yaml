@@ -30,7 +30,8 @@ spec:
       helm:
         releaseName: podinfo
         valueFiles:
-          - $values/infrastructure/production/infra-values/podinfo/values.yaml        
+          - $values/infrastructure/production/infra-values/podinfo/values.yaml
+          - $values/infrastructure/production/apps/.argocd-source-podinfo.yaml
     - ref: values
       repoURL: git@github.com:mecsys/mecsys-gitops.git
       targetRevision: main
