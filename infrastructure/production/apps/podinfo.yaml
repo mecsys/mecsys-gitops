@@ -9,8 +9,8 @@ metadata:
     notifications.argoproj.io/subscribe.on-sync-failed.slack_webhook_openx: '#gitops-new-industries'
     notifications.argoproj.io/subscribe.on-sync-succeeded.slack_webhook_openx: '#gitops-new-industries'
     argocd-image-updater.argoproj.io/image-list: main=ghcr.io/stefanprodan/podinfo:6.x.x
-    # argocd-image-updater.argoproj.io/main.update-strategy: semver
-    # argocd-image-updater.argoproj.io/main.force-update: 'true'
+    argocd-image-updater.argoproj.io/main.update-strategy: semver
+    argocd-image-updater.argoproj.io/main.force-update: 'true'
     argocd-image-updater.argoproj.io/main.helm.image-name: image.repository
     argocd-image-updater.argoproj.io/main.helm.image-tag: image.tag    
     # argocd app strategy
