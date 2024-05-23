@@ -8,6 +8,8 @@ metadata:
     notifications.argoproj.io/subscribe.on-health-degraded.slack_webhook_openx: '#gitops-new-industries'
     notifications.argoproj.io/subscribe.on-sync-failed.slack_webhook_openx: '#gitops-new-industries'
     notifications.argoproj.io/subscribe.on-sync-succeeded.slack_webhook_openx: '#gitops-new-industries'
+    argocd-image-updater.argoproj.io/git-repository: git@github.com:mecsys/mecsys-gitops.git
+    argocd-image-updater.argoproj.io/git-branch: main:image-updater{{range .Images}}-{{.Name}}-{{.NewTag}}{{end}}
     argocd-image-updater.argoproj.io/image-list: main=ghcr.io/stefanprodan/podinfo:6.x.x
     argocd-image-updater.argoproj.io/main.update-strategy: semver
     argocd-image-updater.argoproj.io/main.force-update: 'true'
@@ -18,8 +20,6 @@ metadata:
     # git strategy
     # argocd-image-updater.argoproj.io/write-back-method: git:secret:argo-cd/argocd-repo-creds-ops-mecsys
     # argocd-image-updater.argoproj.io/write-back-target: helmvalues:./infrastructure/production/infra-values/podinfo/values.yaml
-    argocd-image-updater.argoproj.io/git-repository: git@github.com:mecsys/mecsys-gitops.git
-    argocd-image-updater.argoproj.io/git-branch: main:image-updater{{range .Images}}-{{.Name}}-{{.NewTag}}{{end}}
 spec:
   destination:
     namespace: podinfo
