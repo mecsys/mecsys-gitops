@@ -20,8 +20,8 @@ metadata:
     # argocd app strategy
     argocd-image-updater.argoproj.io/write-back-method: argocd
     # git strategy
-    argocd-image-updater.argoproj.io/write-back-method: git:secret:argo-cd/argocd-repo-creds-ops-mecsys
-    argocd-image-updater.argoproj.io/write-back-target: helmvalues:./infrastructure/production/infra-values/podinfo/values.yaml
+    #argocd-image-updater.argoproj.io/write-back-method: git:secret:argo-cd/argocd-repo-creds-ops-mecsys
+    #argocd-image-updater.argoproj.io/write-back-target: helmvalues:./infrastructure/production/infra-values/podinfo/values.yaml
 spec:
   destination:
     namespace: podinfo
