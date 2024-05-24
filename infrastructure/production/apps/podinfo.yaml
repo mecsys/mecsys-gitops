@@ -11,14 +11,14 @@ metadata:
     argocd-image-updater.argoproj.io/git-repository: git@github.com:mecsys/mecsys-gitops.git
     argocd-image-updater.argoproj.io/git-branch: main:image-updater{{range .Images}}-{{.Name}}-{{.NewTag}}{{end}}
     argocd-image-updater.argoproj.io/image-list: ghcr.io/stefanprodan/podinfo:6.x.x
-    argocd-image-updater.argoproj.io/stefanprodan_podinfo.update-strategy: semver
-    argocd-image-updater.argoproj.io/stefanprodan_podinfo.force-update: 'true'
-    argocd-image-updater.argoproj.io/stefanprodan_podinfo.helm.image-name: image.repository
-    argocd-image-updater.argoproj.io/stefanprodan_podinfo.helm.image-tag: image.tag
-    argocd-image-updater.argoproj.io/stefanprodan\/podinfo.helm.image-name: image.repository
-    argocd-image-updater.argoproj.io/stefanprodan\/podinfo.helm.image-tag: image.tag
+    #argocd-image-updater.argoproj.io/stefanprodan_podinfo.update-strategy: semver
+    #argocd-image-updater.argoproj.io/stefanprodan_podinfo.force-update: 'true'
+    #argocd-image-updater.argoproj.io/stefanprodan_podinfo.helm.image-name: image.repository
+    #argocd-image-updater.argoproj.io/stefanprodan_podinfo.helm.image-tag: image.tag
+    #argocd-image-updater.argoproj.io/stefanprodan\/podinfo.helm.image-name: image.repository
+    #argocd-image-updater.argoproj.io/stefanprodan\/podinfo.helm.image-tag: image.tag
     # argocd app strategy
-    # argocd-image-updater.argoproj.io/write-back-method: argocd
+    argocd-image-updater.argoproj.io/write-back-method: argocd
     # git strategy
     argocd-image-updater.argoproj.io/write-back-method: git:secret:argo-cd/argocd-repo-creds-ops-mecsys
     argocd-image-updater.argoproj.io/write-back-target: helmvalues:./infrastructure/production/infra-values/podinfo/values.yaml
