@@ -6,7 +6,7 @@ image:
   # -- Default image pull policy
   pullPolicy: Always
   # -- Overrides the image tag whose default is the chart appVersion
-  tag: "v0.13.0"
+  tag: "v0.13.1"
 
 # -- The deployment strategy to use to replace existing pods with new ones
 updateStrategy:
