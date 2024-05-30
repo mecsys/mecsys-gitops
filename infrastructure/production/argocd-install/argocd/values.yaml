@@ -122,10 +122,10 @@ repoServer:
   resources:
     requests:
       memory: "128Mi"
-      cpu: "100m"
+      cpu: "200m"
     limits:
       memory: "1Gi"
-      cpu: "200m"
+      cpu: "500m"
   autoscaling:
     enabled: false
     minReplicas: 2
