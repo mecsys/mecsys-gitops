@@ -139,7 +139,7 @@ secrets:
 
 general:
   # -- Host to access Semaphore
-  host: semaphore.mecsys.com.br
+  host: 
 
   # -- Use Git client implementation
   gitClient: cmd_git
