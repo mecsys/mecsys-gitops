@@ -16,7 +16,7 @@ spec:
   sources:
     - chart: ansible-semaphore
       repoURL: https://cloudhippie.github.io/charts
-      targetRevision: 2.9.40   
+      targetRevision: 9.4.0
       helm:
         releaseName: semaphore
         valueFiles:
