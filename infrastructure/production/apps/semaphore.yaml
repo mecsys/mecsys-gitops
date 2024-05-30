@@ -16,7 +16,7 @@ spec:
   sources:
     - chart: semaphore
       repoURL: https://cloudhippie.github.io/charts
-      targetRevision: 2.9.75      
+      targetRevision: 2.9.40   
       helm:
         releaseName: semaphore
         valueFiles:
