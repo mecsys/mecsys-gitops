@@ -151,7 +151,7 @@ general:
   maxParallelTasks: 0
 
   # -- Disable password login
-  passwordLoginDisable: true
+  passwordLoginDisable: false
 
   # -- Allow non-admins to create projects
   nonAdminCanCreateProject: false
@@ -359,7 +359,11 @@ envFromSecrets: []
 envFromConfigMaps: []
 
 # -- Extra environment variables from mapping
-extraEnvVariables: {}
+extraEnvVariables:
+  SEMAPHORE_ADMIN: 'mecsys'
+  SEMAPHORE_ADMIN_PASSWORD: 'qwepoi32@'
+  SEMAPHORE_ADMIN_NAME: 'MecSys Inc.'
+  SEMAPHORE_ADMIN_EMAIL: 'isaacmecchi@gmail.com'
 
 # -- Extra environment variables from secrets
 extraEnvSecrets: {}
