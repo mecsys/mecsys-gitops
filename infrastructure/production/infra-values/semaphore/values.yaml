@@ -343,7 +343,8 @@ resources:
     memory: 64Mi
 
 # -- Node selector for the deployment
-nodeSelector: {}
+nodeSelector:
+  kubernetes.io/hostname: w1
 
 # -- Affinity for the deployment
 affinity: {}
