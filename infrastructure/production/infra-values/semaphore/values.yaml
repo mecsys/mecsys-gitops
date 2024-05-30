@@ -145,7 +145,7 @@ general:
   gitClient: cmd_git
 
   # -- Working directory for Semaphore
-  tmpPath: /tmp/semaphore
+  tmpPath: /home/semaphore
 
   # -- Maximum parallel tasks
   maxParallelTasks: 0
