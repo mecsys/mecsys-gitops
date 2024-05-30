@@ -139,7 +139,7 @@ secrets:
 
 general:
   # -- Host to access Semaphore
-  host:
+  host: semaphore.mecsys.com.br
 
   # -- Use Git client implementation
   gitClient: cmd_git
@@ -151,7 +151,7 @@ general:
   maxParallelTasks: 0
 
   # -- Disable password login
-  passwordLoginDisable: false
+  passwordLoginDisable: true
 
   # -- Allow non-admins to create projects
   nonAdminCanCreateProject: false
