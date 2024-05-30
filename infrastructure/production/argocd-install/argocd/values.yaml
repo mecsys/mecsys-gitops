@@ -121,11 +121,11 @@ repoServer:
   replicas: 1
   resources:
     requests:
-      memory: "128Mi"
-      cpu: "200m"
+      memory: "512Mi"
+      cpu: "500m"
     limits:
       memory: "1Gi"
-      cpu: "500m"
+      cpu: "1000m"
   autoscaling:
     enabled: false
     minReplicas: 2
