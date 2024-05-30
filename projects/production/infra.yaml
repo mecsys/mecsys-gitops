@@ -26,4 +26,4 @@ spec:
   - 'https://kubernetes.github.io/ingress-nginx'
   - 'https://vmware-tanzu.github.io/helm-charts'
   - 'https://stefanprodan.github.io/podinfo'
-  - 'https://charts.truecharts.org'
+  - 'https://cloudhippie.github.io/charts'

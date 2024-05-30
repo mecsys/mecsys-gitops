@@ -15,8 +15,8 @@ spec:
   project: infra
   sources:
     - chart: semaphore
-      repoURL: https://charts.truecharts.org
-      targetRevision: 2.0.5      
+      repoURL: https://cloudhippie.github.io/charts
+      targetRevision: 2.9.75      
       helm:
         releaseName: semaphore
         valueFiles:
