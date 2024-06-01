@@ -129,7 +129,7 @@ secrets:
   cookieEncryptionKey: cookieEncryption
 
   # -- Access key encryption secret, generated if not present
-  accesskeyEncryption: "8q/vxu1l1x+/zg44wVYUrM0st9eRhWfm0KTo3uGpMyM="
+  accesskeyEncryption:
 
   # -- Key used within secret for accesskeyEncryption
   accesskeyEncryptionKey: accesskeyEncryption
@@ -359,11 +359,7 @@ envFromSecrets: []
 envFromConfigMaps: []
 
 # -- Extra environment variables from mapping
-extraEnvVariables:
-  SEMAPHORE_ADMIN: 'mecsys'
-  SEMAPHORE_ADMIN_PASSWORD: 'qwepoi32@'
-  SEMAPHORE_ADMIN_NAME: 'MecSys Inc.'
-  SEMAPHORE_ADMIN_EMAIL: 'isaacmecchi@gmail.com'
+extraEnvVariables: {}
 
 # -- Extra environment variables from secrets
 extraEnvSecrets: {}
