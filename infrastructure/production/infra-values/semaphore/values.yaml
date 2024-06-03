@@ -117,13 +117,13 @@ persistence:
 
 secrets:
   # -- Cookie hash secret, generated if not present
-  cookieHash:
+  cookieHash: VzJzUDFRY3dDWlFsTXNxdjlsSFU1VDZSRmlXT05yMng=
 
   # -- Key used within secret for cookieHash
   cookieHashKey: cookieHash
 
   # -- Cookie encryption secret, generated if not present
-  cookieEncryption:
+  cookieEncryption: aFBJU2Z0YnNDVkh2QWlGNzN3bmMxQXVvTEhkcmFSbmY=
 
   # -- Key used within secret for cookieEncryption
   cookieEncryptionKey: cookieEncryption
