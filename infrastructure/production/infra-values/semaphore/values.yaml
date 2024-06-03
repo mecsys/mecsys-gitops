@@ -135,7 +135,7 @@ secrets:
   accesskeyEncryptionKey: accesskeyEncryption
 
   # -- Existing secret to use for secrets
-  existingSecret:
+  existingSecret: semaphore-ansible-semaphore-general-external
 
 general:
   # -- Host to access Semaphore
