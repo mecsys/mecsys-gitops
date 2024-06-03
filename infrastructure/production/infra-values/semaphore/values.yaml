@@ -129,7 +129,7 @@ secrets:
   cookieEncryptionKey: cookieEncryption
 
   # -- Access key encryption secret, generated if not present
-  accesskeyEncryption:
+  accesskeyEncryption: YzJEVzN4dEJyeFVPb1hER2MyS2F4Y3FySm9USG5ieW8=
 
   # -- Key used within secret for accesskeyEncryption
   accesskeyEncryptionKey: accesskeyEncryption
