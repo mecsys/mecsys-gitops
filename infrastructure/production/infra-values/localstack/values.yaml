@@ -135,25 +135,25 @@ service:
   clusterIP: ""
 
 ingress:
-  enabled: false
+  enabled: true
   annotations: {}
   ## @param ingress.ingressClassName Set the name of the class to use
   ##
-  ingressClassName: ""
+  ingressClassName: "nginx"
   hosts:
-    - host: chart-example.local
+    - host: ls.mecsys.com.br
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  tls:
+    - secretName: ls-mecsys-com-br-cert
+      hosts:
+        - ls.mecsys.com.br
 
 persistence:
   ## @param persistence.enabled Enable persistence using Persistent Volume Claims
   ##
-  enabled: false
+  enabled: true
   ## @param persistence.storageClass Persistent Volume storage class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
