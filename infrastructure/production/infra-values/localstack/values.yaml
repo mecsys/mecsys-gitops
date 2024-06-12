@@ -136,9 +136,10 @@ service:
 
 ingress:
   enabled: true
-  annotations: {}
+  annotations:
   ## @param ingress.ingressClassName Set the name of the class to use
   ##
+    cert-manager.io/cluster-issuer: letsencrypt
   ingressClassName: "nginx"
   hosts:
     - host: ls.mecsys.com.br
