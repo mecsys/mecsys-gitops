@@ -18,6 +18,8 @@ spec:
     server: https://kubernetes.default.svc
   - namespace: semaphore
     server: https://kubernetes.default.svc
+  - namespace: localstack
+    server: https://kubernetes.default.svc
   orphanedResources:
     warn: true
   sourceRepos:
@@ -27,3 +29,4 @@ spec:
   - 'https://vmware-tanzu.github.io/helm-charts'
   - 'https://stefanprodan.github.io/podinfo'
   - 'https://cloudhippie.github.io/charts'
+  - 'https://localstack.github.io/helm-charts'
