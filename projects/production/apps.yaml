@@ -12,9 +12,12 @@ spec:
     server: https://kubernetes.default.svc
   - namespace: uptime-kuma
     server: https://kubernetes.default.svc
+  - namespace: localstack
+    server: https://kubernetes.default.svc
   orphanedResources:
     warn: true
   sourceRepos:
   - 'git@github.com:mecsys/mecsys-stacks.git'
   - 'https://charts.bitnami.com/bitnami'
   - 'https://dirsigler.github.io/uptime-kuma-helm'
+  - 'https://localstack.github.io/helm-charts'
