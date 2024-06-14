@@ -15,7 +15,7 @@ atlantisUrl: "https://atlantis.mecsys.com.br"
 # Example:  http://10.0.0.0
 
 # -- Replace this with your own repo allowlist.
-orgAllowlist: "github.com/mecsys-gitops"
+orgAllowlist: "github.com/mecsys/mecsys-gitops"
 
 # -- Deprecated in favor of orgAllowlist.
 orgWhitelist: "<deprecated>"
