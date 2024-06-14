@@ -11,18 +11,18 @@ nameOverride: ""
 # -- An option to override the atlantis url,
 # if not using an ingress, set it to the external IP.
 # Check values.yaml for examples.
-atlantisUrl: ""
+atlantisUrl: "https://atlantis.mecsys.com.br"
 # Example:  http://10.0.0.0
 
 # -- Replace this with your own repo allowlist.
-orgAllowlist: "<replace-me>"
+orgAllowlist: "github.com/mecsys-gitops"
 
 # -- Deprecated in favor of orgAllowlist.
 orgWhitelist: "<deprecated>"
 
 # -- Specify the log level for Atlantis.
 # Accepts: debug, info, warn, or error.
-logLevel: ""
+logLevel: "info"
 
 # -- If using GitHub, please enter your values as follows.
 # The chart will perform the base64 encoding for values that are stored in secrets.
@@ -38,15 +38,14 @@ github: {}
 # -- If using a GitHub App, please enter your values as follows.
 # The chart will perform the base64 encoding for you for values that are stored in secrets.
 # Check values.yaml for examples.
-githubApp: {}
-# githubApp:
-#   id: 123456
-#   slug: foo
-#   key: |
-#     -----BEGIN PRIVATE KEY-----
-#     ...
-#     -----END PRIVATE KEY-----
-#   secret: baz
+githubApp:
+  id: 123456
+  slug: foo
+  key: |
+    -----BEGIN PRIVATE KEY-----
+    ...
+    -----END PRIVATE KEY-----
+  secret: baz
 
 # -- If using GitLab, please enter your values as follows.
 # The 'hostname' key is exclusive to GitLab Enterprise installations.
@@ -184,7 +183,7 @@ config: ""
 # -- Use Server Side Repo Config,
 # ref: https://www.runatlantis.io/docs/server-side-repo-config.html.
 # Check values.yaml for examples.
-repoConfig: ""
+# repoConfig: ""
 # Example with default configuration:
 # repoConfig: |
 #   ---
@@ -203,6 +202,60 @@ repoConfig: ""
 #   metrics:
 #     prometheus:
 #       endpoint: /metrics
+repoConfig: |
+  ---
+   # repos.yaml
+   # Specify TERRAGRUNT_TFPATH environment variable to accommodate setting --default-tf-version
+   # Generate json plan via terragrunt for policy checks
+   repos:
+   - id: "/mecsys/.*/"
+     pre_workflow_hooks:
+     - run: "terragrunt-atlantis-config generate --output atlantis.yaml --autoplan --parallel --create-workspace"
+     workflow: terragrunt
+   workflows:
+     terragrunt:
+       plan:
+         steps:
+         - env:
+             name: TERRAGRUNT_TFPATH
+             command: 'echo "terraform${ATLANTIS_TERRAFORM_VERSION}"'
+         - env:
+             # Reduce Terraform suggestion output
+             name: TF_IN_AUTOMATION
+             value: 'true'
+         - run:
+             # Allow for targetted plans/applies as not supported for Terraform wrappers by default
+             command: terragrunt plan -input=false $(printf '%s' $COMMENT_ARGS | sed 's/,/ /g' | tr -d '\\') -no-color -out $PLANFILE
+             output: hide
+         - run: |
+             terragrunt show $PLANFILE
+       apply:
+         steps:
+         - env:
+             name: TERRAGRUNT_TFPATH
+             command: 'echo "terraform${ATLANTIS_TERRAFORM_VERSION}"'
+         - env:
+             # Reduce Terraform suggestion output
+             name: TF_IN_AUTOMATION
+             value: 'true'
+         - run: terragrunt apply -input=false $PLANFILE
+       import:
+         steps:
+         - env:
+             name: TERRAGRUNT_TFPATH
+             command: 'echo "terraform${DEFAULT_TERRAFORM_VERSION}"'
+         - env:
+             name: TF_VAR_author
+             command: 'git show -s --format="%ae" $HEAD_COMMIT'
+         # Allow for imports as not supported for Terraform wrappers by default
+         - run: terragrunt import -input=false $(printf '%s' $COMMENT_ARGS | sed 's/,/ /' | tr -d '\\')
+       state_rm:
+         steps:
+         - env:
+             name: TERRAGRUNT_TFPATH
+             command: 'echo "terraform${DEFAULT_TERRAFORM_VERSION}"'
+         # Allow for state removals as not supported for Terraform wrappers by default
+         - run: terragrunt state rm $(printf '%s' $COMMENT_ARGS | sed 's/,/ /' | tr -d '\\')
 
 # -- Enables atlantis to run on a fork Pull Requests.
 allowForkPRs: false
@@ -239,16 +292,15 @@ basicAuth:
   password: ""
 
 # -- If managing secrets outside the chart for the Basic Auth secret, use this variable to reference the secret name.
-basicAuthSecretName: ""
+basicAuthSecretName: "atlantis-external-secret"
 
 # -- Optionally specify an API secret to enable the API.
 # Check values.yaml for examples.
-api: {}
-# api:
-#   secret: "s3cr3t"
+api:
+  secret: ""
 
 # -- If managing secrets outside the chart for the API secret, use this variable to reference the secret name.
-apiSecretName: ""
+apiSecretName: "atlantis-external-secret"
 
 # -- Override the command field of the Atlantis container.
 command: []
@@ -310,7 +362,7 @@ terminationGracePeriodSeconds:
 
 ingress:
   enabled: true
-  ingressClassName:
+  ingressClassName: "nginx"
   apiVersion: ""
   labels: {}
   # -- Check values.yaml for examples.
@@ -330,7 +382,7 @@ ingress:
   #      service: test2
   #      port:
   pathType: ImplementationSpecific
-  host: ""
+  host: "atlantis.mecsys.com.br"
   # -- Used when several hosts are required.
   # Check values.yaml for examples.
   hosts: []
@@ -559,7 +611,7 @@ initContainers: []
 
 initConfig:
   # -- Install providers/plugins into a path shared with the Atlantis pod.
-  enabled: false
+  enabled: true
   image: alpine:latest
   imagePullPolicy: IfNotPresent
   # -- SharedDir is set as env var INIT_SHARED_DIR.
