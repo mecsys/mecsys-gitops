@@ -8,7 +8,8 @@ locals {
   region_vars            = read_terragrunt_config(find_in_parent_folders("region.hcl"))
   environment            = local.account_vars.locals.environment
   profile                = local.account_vars.locals.profile
-  region                = local.region_vars.locals.region
+  region                 = local.region_vars.locals.region
+  bucket_name            = "mecsys"
 }
 
 # Terragrunt will copy the Terraform configurations specified by the source parameter, along with any files in the
