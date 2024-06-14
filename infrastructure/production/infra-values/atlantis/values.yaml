@@ -292,7 +292,7 @@ basicAuth:
   password: ""
 
 # -- If managing secrets outside the chart for the Basic Auth secret, use this variable to reference the secret name.
-basicAuthSecretName: "atlantis-external-secret"
+basicAuthSecretName: "atlantis-external-basic-auth"
 
 # -- Optionally specify an API secret to enable the API.
 # Check values.yaml for examples.
