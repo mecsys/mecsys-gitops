@@ -110,7 +110,7 @@ vcsSecretName: "atlantis-external-vcs-webhook"
 # Source: https://stackoverflow.com/questions/42148841/github-clone-with-oauth-access-token
 
 # -- If managing secrets outside the chart for the gitconfig, use this variable to reference the secret name
-gitconfigSecretName: "atlantis-external-config"
+gitconfigSecretName: "atlantis-external-gitconfig"
 
 # -- When referencing Terraform modules in private repositories or registries (such as Artfactory)
 # configuing a .netrc file for authentication may be required.
