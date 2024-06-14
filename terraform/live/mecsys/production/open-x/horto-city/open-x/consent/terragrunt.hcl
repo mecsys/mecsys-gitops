@@ -10,7 +10,7 @@ locals {
   profile                = local.account_vars.locals.profile
   environment            = local.account_vars.locals.environment  
   region                 = local.region_vars.locals.region
-  bucket_name            = "mecsys-bucket"
+  bucket_name            = "mecsys-bucket-2"
 }
 
 # Terragrunt will copy the Terraform configurations specified by the source parameter, along with any files in the
