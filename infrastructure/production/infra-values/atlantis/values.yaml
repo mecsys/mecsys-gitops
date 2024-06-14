@@ -28,11 +28,11 @@ logLevel: "info"
 # The chart will perform the base64 encoding for values that are stored in secrets.
 # The 'hostname' key is exclusive to GitHub Enterprise installations.
 # Check values.yaml for examples.
-github: {}
-# github:
-#   user: foo
-#   token: bar
-#   secret: baz
+# github: {}
+github:
+  user: foo
+  token: bar
+  secret: baz
 #   hostname: github.your.org
 
 # -- If using a GitHub App, please enter your values as follows.
