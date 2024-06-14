@@ -22,7 +22,7 @@ orgWhitelist: "<deprecated>"
 
 # -- Specify the log level for Atlantis.
 # Accepts: debug, info, warn, or error.
-logLevel: "info"
+logLevel: "debug"
 
 # -- If using GitHub, please enter your values as follows.
 # The chart will perform the base64 encoding for values that are stored in secrets.
