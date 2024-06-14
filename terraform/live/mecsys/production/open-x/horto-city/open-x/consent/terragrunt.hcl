@@ -43,8 +43,7 @@ inputs = {
   version     = "2024061401"
 
   bucket                                = local.bucket_name
-  create_bucket                         = true
-  acl                                   = "private"
+  create_bucket                         = true  
   attach_deny_insecure_transport_policy = true
   block_public_acls                     = true
   block_public_policy                   = true
