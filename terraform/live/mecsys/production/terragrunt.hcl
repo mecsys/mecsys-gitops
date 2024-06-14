@@ -54,7 +54,7 @@ generate "provider" {
   }
 
   terraform {
-    required_version = ">= 1.5.7"
+    required_version = "~= 1.8.3"
 
     # Put this in 2023-11-13 for better compatibility until complete migration to 5.x
     required_providers {

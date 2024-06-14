@@ -62,7 +62,8 @@ generate "provider" {
   }
 
   terraform {
-    required_version = "~> 1.3.0"
+    required_version = "~> 1.8.3"
+    
     required_providers {
       aws = {
         source  = "hashicorp/aws"
