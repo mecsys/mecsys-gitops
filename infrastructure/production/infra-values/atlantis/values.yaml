@@ -40,8 +40,8 @@ logLevel: "debug"
 # Check values.yaml for examples.
 githubApp:
   key: ""
-#   id: 123456
-#   slug: foo
+  id: 123456
+  slug: foo
 #   key: |
 #     -----BEGIN PRIVATE KEY-----
 #     ...
