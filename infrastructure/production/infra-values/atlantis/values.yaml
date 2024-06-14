@@ -372,7 +372,7 @@ ingress:
     cert-manager.io/cluster-issuer: letsencrypt
   #   kubernetes.io/tls-acme: "true"
   # -- Use / for nginx.
-  path: /*
+  path: /
   # --  Used when several paths under the same host, with different backend services, are required.
   # Check values.yaml for examples.
   paths: []
