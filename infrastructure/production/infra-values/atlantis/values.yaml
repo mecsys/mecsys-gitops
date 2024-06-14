@@ -366,9 +366,9 @@ ingress:
   apiVersion: ""
   labels: {}
   # -- Check values.yaml for examples.
-  annotations: {}
-  # annotations:
-  #   kubernetes.io/ingress.class: nginx
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt
   #   kubernetes.io/tls-acme: "true"
   # -- Use / for nginx.
   path: /*
@@ -393,10 +393,10 @@ ingress:
   #     service: chart-example1
   #     paths: ["/lala"]
   # -- Check values.yaml for examples.
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  tls:
+   - secretName: atlantis-mecsys-com-br-cert
+     hosts:
+       - atlantis.mecsys.com.br
 
 webhook_ingress:
   # -- When true creates a secondary webhook.
