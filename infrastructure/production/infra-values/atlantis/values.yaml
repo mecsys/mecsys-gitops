@@ -285,7 +285,7 @@ disableApplyAll: false
 disableRepoLocking: false
 
 # -- Use Diff Markdown Format for color coding diffs.
-enableDiffMarkdownFormat: false
+enableDiffMarkdownFormat: true
 
 # -- Optionally specify an username and a password for basic authentication.
 basicAuth:
