@@ -6,8 +6,9 @@ include {
 locals {
   account_vars           = read_terragrunt_config(find_in_parent_folders("account.hcl"))
   region_vars            = read_terragrunt_config(find_in_parent_folders("region.hcl"))
-  environment            = local.account_vars.locals.environment
+  default_tags           = local.account_vars.locals.default_tags
   profile                = local.account_vars.locals.profile
+  environment            = local.account_vars.locals.environment  
   region                 = local.region_vars.locals.region
   bucket_name            = "mecsys"
 }
