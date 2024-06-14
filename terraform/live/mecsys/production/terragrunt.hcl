@@ -6,7 +6,7 @@ locals {
   region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl", "i-dont-exist.hcl"),
     {
       locals = {
-        region = "sa-east-1"
+        region = "us-east-1"
       }
   })
 
@@ -22,8 +22,8 @@ remote_state {
     bucket                  = "terragrunt-remote-state-mecsys"
     dynamodb_table          = "terragrunt-state-lock-dynamo-mecsys"
     key                     = "${path_relative_to_include()}/terraform.tfstate"
-    region                  = local.region_mecsys-prd
-    profile                 = local.profile_mecsys-prd
+    region                  = local.region
+    profile                 = local.profile
     encrypt                 = true
   }
 
@@ -54,7 +54,7 @@ generate "provider" {
   }
 
   terraform {
-    required_version = ">= 1.5.7"
+    required_version = "~= 1.8.3"
 
     # Put this in 2023-11-13 for better compatibility until complete migration to 5.x
     required_providers {

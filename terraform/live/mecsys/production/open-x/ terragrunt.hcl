@@ -6,7 +6,7 @@ locals {
   region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl", "i-dont-exist.hcl"),
     {
       locals = {
-        region = "sa-east-1"
+        region = "us-east-1"
       }
   })
 
@@ -62,7 +62,8 @@ generate "provider" {
   }
 
   terraform {
-    required_version = "~> 1.3.0"
+    required_version = "~> 1.8.3"
+    
     required_providers {
       aws = {
         source  = "hashicorp/aws"
