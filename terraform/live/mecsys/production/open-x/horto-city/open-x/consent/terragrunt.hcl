@@ -14,7 +14,7 @@ locals {
 # working directory, into a temporary folder, and execute your Terraform commands in that folder.
 
 terraform {
-  source = "git::ssh://git@github.com/terraform-aws-modules/terraform-aws-security-group.git?ref=v5.1.1"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket.git//?ref=tags/v3.6.0"
 }
 
 # These are the variables we have to pass in to use the module specified in the terragrunt configuration above
