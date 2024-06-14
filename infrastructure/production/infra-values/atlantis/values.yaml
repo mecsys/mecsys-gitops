@@ -39,13 +39,13 @@ logLevel: "info"
 # The chart will perform the base64 encoding for you for values that are stored in secrets.
 # Check values.yaml for examples.
 githubApp:
-  id: 123456
-  slug: foo
-  key: |
-    -----BEGIN PRIVATE KEY-----
-    ...
-    -----END PRIVATE KEY-----
-  secret: baz
+#   id: 123456
+#   slug: foo
+#   key: |
+#     -----BEGIN PRIVATE KEY-----
+#     ...
+#     -----END PRIVATE KEY-----
+#   secret: baz
 
 # -- If using GitLab, please enter your values as follows.
 # The 'hostname' key is exclusive to GitLab Enterprise installations.
