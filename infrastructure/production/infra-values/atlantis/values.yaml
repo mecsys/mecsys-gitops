@@ -39,6 +39,7 @@ logLevel: "info"
 # The chart will perform the base64 encoding for you for values that are stored in secrets.
 # Check values.yaml for examples.
 githubApp:
+  enable: true
 #   id: 123456
 #   slug: foo
 #   key: |
