@@ -22,8 +22,8 @@ remote_state {
     bucket                  = "terragrunt-remote-state-mecsys"
     dynamodb_table          = "terragrunt-state-lock-dynamo-mecsys"
     key                     = "${path_relative_to_include()}/terraform.tfstate"
-    region                  = local.region_mecsys-prd
-    profile                 = local.profile_mecsys-prd
+    region                  = local.region-prd
+    profile                 = local.profile-prd
     encrypt                 = true
   }
 
