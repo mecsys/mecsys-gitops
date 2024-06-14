@@ -23,6 +23,7 @@ inputs = {
   # General
   region      = local.region
   environment = local.environment
+  version     = "2024061401"
 
   # General tags
   tags = merge(
