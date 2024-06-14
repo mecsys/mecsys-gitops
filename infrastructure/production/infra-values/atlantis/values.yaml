@@ -30,7 +30,7 @@ logLevel: "debug"
 # Check values.yaml for examples.
 # github: {}
 github:
-#   user: foo
+  user: mecsys
 #   token: bar
 #   secret: baz
 #   hostname: github.your.org
