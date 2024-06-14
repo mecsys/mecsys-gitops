@@ -631,7 +631,7 @@ initConfig:
 
     # example for terragrunt
     TG_VERSION="v0.47.0"
-    TG_SHA256_SUM="98d45f6bfbfae84b51364c1ad6920f09ecb4d834908b0535e4e331a9fc6fc75b"
+    TG_SHA256_SUM="d2efc88d2bf53403675eaa49dba1f4edd740af7b0e2ddcc0e0e37b2e9cbe23a8"
     TG_FILE="${INIT_SHARED_DIR}/terragrunt"
     wget https://github.com/gruntwork-io/terragrunt/releases/download/${TG_VERSION}/terragrunt_linux_arm64 -O "${TG_FILE}"
     echo "${TG_SHA256_SUM}  ${TG_FILE}" | sha256sum -c
@@ -640,12 +640,12 @@ initConfig:
 
     # example for terragrunt-atlantis-config
     TAC_VERSION="1.16.0" # without v
-    TAC_SHA256_SUM="fc3b069cf4ae51e9b7a7d01f09862d1974b260fffb3ec857d661d7b1756fe26f"
+    TAC_SHA256_SUM="b37fa0f2e504d026438f03d9a3768ce3c6c4491cec6d1c5547db9a60bf2de9b3"
     TAC_FILE="${INIT_SHARED_DIR}/terragrunt-atlantis-config"
-    wget "https://github.com/transcend-io/terragrunt-atlantis-config/releases/download/v${TAC_VERSION}/terragrunt-atlantis-config_${TAC_VERSION}_linux_arm64.tar.gz"
-    echo "${TAC_SHA256_SUM}  terragrunt-atlantis-config_${TAC_VERSION}_linux_arm64.tar.gz" | sha256sum -c
-    tar xf "terragrunt-atlantis-config_${TAC_VERSION}_linux_arm64.tar.gz"
-    cp -fv "terragrunt-atlantis-config_${TAC_VERSION}_linux_arm64/terragrunt-atlantis-config_${TAC_VERSION}_linux_arm64" "${TAC_FILE}"
+    wget "https://github.com/transcend-io/terragrunt-atlantis-config/releases/download/v${TAC_VERSION}/terragrunt-atlantis-config_${TAC_VERSION}_linux_arm.tar.gz"
+    echo "${TAC_SHA256_SUM}  terragrunt-atlantis-config_${TAC_VERSION}_linux_arm.tar.gz" | sha256sum -c
+    tar xf "terragrunt-atlantis-config_${TAC_VERSION}_linux_arm.tar.gz"
+    cp -fv "terragrunt-atlantis-config_${TAC_VERSION}_linux_arm/terragrunt-atlantis-config_${TAC_VERSION}_linux_arm" "${TAC_FILE}"
     chmod 755 "${TG_FILE}"
     terragrunt-atlantis-config version
 
