@@ -91,7 +91,7 @@ azuredevops: {}
 #   webhookPassword: baz
 
 # -- If managing secrets outside the chart for the webhook, use this variable to reference the secret name
-vcsSecretName: "atlantis-external-secret"
+vcsSecretName: "atlantis-external-vcs"
 
 # -- When referencing Terraform modules in private repositories, it may be helpful
 # (necessary?) to use redirection in a .gitconfig.
@@ -109,7 +109,7 @@ gitconfig: ""
 # Source: https://stackoverflow.com/questions/42148841/github-clone-with-oauth-access-token
 
 # -- If managing secrets outside the chart for the gitconfig, use this variable to reference the secret name
-gitconfigSecretName: "atlantis-external-secret"
+gitconfigSecretName: "atlantis-external-config"
 
 # -- When referencing Terraform modules in private repositories or registries (such as Artfactory)
 # configuing a .netrc file for authentication may be required.
@@ -120,7 +120,7 @@ netrc: ""
 # machine bitbucket.myapp.com login YOUR_USERNAME password YOUR_PASSWORD
 
 # -- If managing secrets outside the chart for the netrc file, use this variable to reference the secret name
-netrcSecretName: "atlantis-external-secret"
+netrcSecretName: "atlantis-external-netrc"
 
 # -- To specify AWS credentials to be mapped to ~/.aws or to aws.directory.
 # Check values.yaml for examples.
@@ -138,7 +138,7 @@ aws: {}
 #   directory: "/home/atlantis/.aws"
 
 # -- To reference an already existing Secret object with AWS credentials
-awsSecretName: "atlantis-external-secret"
+awsSecretName: "atlantis-external-aws"
 
 # -- To keep backwards compatibility only.
 # Deprecated (see googleServiceAccountSecrets).
