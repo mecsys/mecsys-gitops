@@ -20,6 +20,22 @@ terraform {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket.git//?ref=tags/v4.1.2"
 }
 
+generate "provider" {
+  path      = "provider.tf"
+  if_exists = "overwrite"
+  contents  = <<EOF
+  # Providers config
+  provider "aws" {
+    profile = "${local.profile}"
+    region  = "${local.region}"
+  }
+
+  terraform {
+    required_version = "~> 1.3.0"
+  }
+EOF
+}
+
 # These are the variables we have to pass in to use the module specified in the terragrunt configuration above
 inputs = {
 
