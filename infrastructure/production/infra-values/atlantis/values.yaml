@@ -296,8 +296,8 @@ basicAuthSecretName: "atlantis-external-secret"
 
 # -- Optionally specify an API secret to enable the API.
 # Check values.yaml for examples.
-api: {}
-  secret: ""
+api:
+#  secret: ""
 
 # -- If managing secrets outside the chart for the API secret, use this variable to reference the secret name.
 apiSecretName: "atlantis-external-api"
