@@ -39,9 +39,9 @@ github:
 # The chart will perform the base64 encoding for you for values that are stored in secrets.
 # Check values.yaml for examples.
 githubApp: {}
-  key: ""
-  id: 123456
-  slug: foo
+#  key: ""
+#  id: 123456
+#  slug: foo
 #   key: |
 #     -----BEGIN PRIVATE KEY-----
 #     ...
