@@ -125,7 +125,7 @@ netrcSecretName: "atlantis-external-netrc"
 
 # -- To specify AWS credentials to be mapped to ~/.aws or to aws.directory.
 # Check values.yaml for examples.
-aws: {}
+# aws: {}
 # aws:
 #   credentials: |
 #     [default]
