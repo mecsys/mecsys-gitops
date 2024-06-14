@@ -8,6 +8,7 @@ locals {
   region_vars            = read_terragrunt_config(find_in_parent_folders("region.hcl"))
   environment            = local.account_vars.locals.environment
   profile                = local.account_vars.locals.profile
+  region                = local.region_vars.locals.region
 }
 
 # Terragrunt will copy the Terraform configurations specified by the source parameter, along with any files in the
@@ -20,10 +21,30 @@ terraform {
 # These are the variables we have to pass in to use the module specified in the terragrunt configuration above
 inputs = {
 
-  # General
-  region      = local.region
-  environment = local.environment
+  # General  
   version     = "2024061401"
+
+  bucket                                = local.bucket_name
+  create_bucket                         = true
+  acl                                   = "private"
+  attach_deny_insecure_transport_policy = true
+  block_public_acls                     = true
+  block_public_policy                   = true
+  ignore_public_acls                    = true
+  restrict_public_buckets               = true
+  force_destroy                         = false
+
+  versioning = {
+    enabled = false
+  }
+
+  server_side_encryption_configuration = {
+    rule = {
+      apply_server_side_encryption_by_default = {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
 
   # General tags
   tags = merge(
