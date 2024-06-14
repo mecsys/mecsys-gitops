@@ -6,7 +6,7 @@ locals {
   region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl", "i-dont-exist.hcl"),
     {
       locals = {
-        region = "sa-east-1"
+        region = "us-east-1"
       }
   })
 
