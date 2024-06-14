@@ -29,7 +29,7 @@ logLevel: "debug"
 # The 'hostname' key is exclusive to GitHub Enterprise installations.
 # Check values.yaml for examples.
 # github: {}
-# github:
+github:
 #   user: foo
 #   token: bar
 #   secret: baz
@@ -38,7 +38,7 @@ logLevel: "debug"
 # -- If using a GitHub App, please enter your values as follows.
 # The chart will perform the base64 encoding for you for values that are stored in secrets.
 # Check values.yaml for examples.
-githubApp:
+githubApp: {}
   key: ""
   id: 123456
   slug: foo
