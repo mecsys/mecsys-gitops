@@ -42,7 +42,7 @@ extraEnv:
   # - name: AWS_REGION
   #   value: "us-west-1"
   - name: ARGOCD_GPG_ENABLED
-    value 'false'
+    value: 'false'
 
 # -- Init containers to add to the image updater pod
 initContainers: []
