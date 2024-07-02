@@ -59,7 +59,7 @@ server:
     runAsNonRoot: true
     seccompProfile:
       type: RuntimeDefault
-  extraEnv:
+  env:
     - name: ARGOCD_GPG_ENABLED
       value: "false"
   ingress:
@@ -107,7 +107,7 @@ controller:
     runAsNonRoot: true
     seccompProfile:
       type: RuntimeDefault
-  extraEnv:
+  env:
     - name: ARGOCD_GPG_ENABLED
       value: "false"
 
