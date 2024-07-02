@@ -38,7 +38,7 @@ extraArgs: []
   # - /app/config/registries.conf
 
 # -- Extra environment variables for argocd-image-updater
-extraEnv: []
+extraEnv:
   # - name: AWS_REGION
   #   value: "us-west-1"
   - ARGOCD_GPG_ENABLED
