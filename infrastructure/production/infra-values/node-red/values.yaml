@@ -178,7 +178,7 @@ ingress:
     - secretName: node-red-mecsys-com-br-tls
     # -- Hostnames for the Ingress
     hosts:
-     - node-red.mecsys.com.br
+      - node-red.mecsys.com.br
     # -- Certificate used by the Cert-Manager
     # certificate:
     # -- Enable certificate
