@@ -218,8 +218,8 @@ resources:
     memory: 128Mi
 
 # -- Node selector
-nodeSelector:
-  kubernetes.io/hostname: w2
+nodeSelector: {}
+  #kubernetes.io/hostname: w2
 
 # -- Toleration labels for pod assignment
 tolerations: []
