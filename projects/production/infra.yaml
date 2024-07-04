@@ -22,6 +22,8 @@ spec:
     server: https://kubernetes.default.svc
   - namespace: atlantis
     server: https://kubernetes.default.svc
+  - namespace: node-red
+    server: https://kubernetes.default.svc
   orphanedResources:
     warn: true
   sourceRepos:
