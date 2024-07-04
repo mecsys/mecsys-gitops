@@ -180,9 +180,9 @@ ingress:
       hosts:
         - node-red.mecsys.com.br
     # -- Certificate used by the Cert-Manager
-    # certificate:
+    certificate:
     # -- Enable certificate
-    #   enabled: true
+      enabled: false
     # -- Name of the certificate default: `$fullname-cert-$index`
     #   name: ""
     # -- Reference of ClusterIssuers or Issuer
