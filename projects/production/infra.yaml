@@ -33,3 +33,4 @@ spec:
   - 'https://cloudhippie.github.io/charts'
   - 'https://localstack.github.io/helm-charts'
   - 'https://runatlantis.github.io/helm-charts'
+  - 'https://schwarzit.github.io/node-red-chart'
