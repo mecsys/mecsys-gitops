@@ -130,7 +130,7 @@ metrics:
 
 persistence:
   # -- Use persistent volume to store data
-  enabled: false
+  enabled: true
   ## node-red data Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -218,8 +218,8 @@ resources:
     memory: 128Mi
 
 # -- Node selector
-nodeSelector: {}
-  #kubernetes.io/hostname: w2
+nodeSelector:
+  kubernetes.io/hostname: w2
 
 # -- Toleration labels for pod assignment
 tolerations: []
