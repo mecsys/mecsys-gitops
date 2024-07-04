@@ -247,12 +247,12 @@ extraVolumeMounts:
 #   mountPath: /test
 
 # -- You can configure node-red using a settings file. default: {}
-settings: {}
+settings:
 # Details about the content of the settings.js, you can lookup under
 # https://nodered.org/docs/user-guide/runtime/settings-file
 # The ConfigMap should already exist and the key must be named `settings.js`
-#  name: settings-config
-#  configMapName: settings-config
+  name: settings-config
+  configMapName: settings-config
 
 # -- Labels to add to the node-red pod. default: {}
 podLabels: {}
