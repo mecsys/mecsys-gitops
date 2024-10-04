@@ -7,10 +7,6 @@ global:
 certificate:
   enabled: true
 
-redisSecretInit:
-  serviceAccount:
-    automountServiceAccountToken: true
-
 configs:
   cm:
     create: true
