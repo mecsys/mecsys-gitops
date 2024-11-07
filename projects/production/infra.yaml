@@ -24,6 +24,8 @@ spec:
     server: https://kubernetes.default.svc
   - namespace: node-red
     server: https://kubernetes.default.svc
+  - namespaces: monitoring
+    server: 
   orphanedResources:
     warn: true
   sourceRepos:
@@ -36,3 +38,4 @@ spec:
   - 'https://localstack.github.io/helm-charts'
   - 'https://runatlantis.github.io/helm-charts'
   - 'https://schwarzit.github.io/node-red-chart'
+  - 'https://prometheus-community.github.io/helm-charts'
