@@ -168,8 +168,8 @@ config:
         follow_redirects: true
         preferred_ip_protocol: "ip4"
         compression: gzip
-        headers:
-          Accept-Encoding: gzip        
+        # headers:
+        #   Accept-Encoding: gzip
         fail_if_not_ssl: true
         tls_config:
           insecure_skip_verify: false
