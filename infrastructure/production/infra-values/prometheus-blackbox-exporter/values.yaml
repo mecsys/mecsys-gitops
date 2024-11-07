@@ -227,23 +227,24 @@ serviceAccount:
 ## from outside the Kubernetes cluster.
 ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
-  enabled: false
-  className: ""
+  enabled: true
+  className: "nginx"
   labels: {}
-  annotations: {}
+  annotations:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: letsencrypt
   hosts:
     ## The host property on hosts and tls is passed through helm tpl function.
     ## ref: https://helm.sh/docs/developing_charts/#using-the-tpl-function
-    - host: chart-example.local
+    - host: probes.mecsys.com.br
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  tls:
+    - secretName: probes-mecsys-com-br-tls
+      hosts:
+        - probes.mecsys.com.br
 
 podAnnotations: {}
 
