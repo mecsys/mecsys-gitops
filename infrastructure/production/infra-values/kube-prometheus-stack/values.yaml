@@ -2763,14 +2763,14 @@ prometheusOperator:
     ## If true, the operator will create and maintain a service for scraping kubelets
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/helm/prometheus-operator/README.md
     ##
-    enabled: true
+    enabled: false
     namespace: kube-system
     selector: ""
     ## Use '{{ template "kube-prometheus-stack.fullname" . }}-kubelet' by default
     name: ""
 
   ## Create Endpoints objects for kubelet targets.
-  kubeletEndpointsEnabled: true
+  kubeletEndpointsEnabled: false
   ## Create EndpointSlice objects for kubelet targets.
   kubeletEndpointSliceEnabled: false
 
@@ -2784,7 +2784,7 @@ prometheusOperator:
   serviceMonitor:
     ## If true, create a serviceMonitor for prometheus operator
     ##
-    selfMonitor: true
+    selfMonitor: false
 
     ## Labels for ServiceMonitor
     additionalLabels: {}
@@ -3032,7 +3032,7 @@ prometheus:
   ## Note many of features described below (e.g. rules, query, alerting, remote read, thanos) will not work in agent mode.
   ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/designs/prometheus-agent.md
   ##
-  agentMode: true
+  agentMode: false
 
   ## Annotations for Prometheus
   ##
@@ -3466,7 +3466,7 @@ prometheus:
   serviceMonitor:
     ## If true, create a serviceMonitor for prometheus
     ##
-    selfMonitor: true
+    selfMonitor: false
 
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
