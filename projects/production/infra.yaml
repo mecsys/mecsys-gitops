@@ -24,7 +24,7 @@ spec:
     server: https://kubernetes.default.svc
   - namespace: node-red
     server: https://kubernetes.default.svc
-  - namespaces: monitoring
+  - namespace: monitoring
     server: https://kubernetes.default.svc
   orphanedResources:
     warn: true
