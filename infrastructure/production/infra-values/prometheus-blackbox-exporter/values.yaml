@@ -167,6 +167,36 @@ config:
         valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
         follow_redirects: true
         preferred_ip_protocol: "ip4"
+        compression: gzip
+        headers:
+          Accept-Encoding: gzip        
+        fail_if_not_ssl: true
+        tls_config:
+          insecure_skip_verify: false
+        preferred_ip_protocol: "ip4"
+        ip_protocol_fallback: false
+
+    tcp_connect:
+      prober: tcp
+      timeout: 5s
+
+    tcp_tls_connect:
+      prober: tcp
+      timeout: 5s
+      tcp:
+        tls: true
+
+    icmp_ipv4:
+      prober: icmp
+      timeout: 5s
+      icmp:
+        preferred_ip_protocol: "ip4"
+
+    icmp_ipv6:
+      prober: icmp
+      timeout: 5s
+      icmp:
+        preferred_ip_protocol: "ip6"
 
 # Set custom config path, other than default /config/blackbox.yaml. If let empty, path will be "/config/blackbox.yaml"
 # configPath: "/foo/bar"
