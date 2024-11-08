@@ -276,13 +276,7 @@ ingress:
             "https://cd.mecsys.com.br",
             "https://kc.mecsys.com.br",
             "https://ls.mecsys.com.br",
-            "https://status.mecsys.com.br",
-            "https://alias.open-x-tst-addon.sensedia-eng.com",
-            "https://alias.open-x-stg-addon.sensedia-eng.com",
-            "https://alias.open-finance.sensedia.net",
-            "https://alias-opin-addon.sensedia.net",
-            "https://alias.open-finance-pcm.sensedia.net",
-            "https://alias.open-insurance-pcm.sensedia.net"
+            "https://status.mecsys.com.br"
             ], 
           "labels" : { 
             "job": "mecsys-blackbox-http"
