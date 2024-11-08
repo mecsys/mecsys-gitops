@@ -281,8 +281,17 @@ ingress:
         }]';
       }
       location "/discovery/mecsys-blackbox-icmp" {        
-        return 200 'gangnam style!';
-        add_header Content-Type text/plain;
+        add_header "Content-Type" "application/json";
+        return 200 '[{ 
+          "targets" : [ 
+            "brick.mecsys.com.br",
+            "cd.mecsys.com.br",
+            "kc.mecsys.com.br"
+            ], 
+          "labels" : { 
+          "job": "mecsys-blackbox-icmp"
+          } 
+        }]';
       }
   hosts:
     ## The host property on hosts and tls is passed through helm tpl function.
