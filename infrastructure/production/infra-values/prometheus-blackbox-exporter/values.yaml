@@ -268,7 +268,7 @@ ingress:
     cert-manager.io/cluster-issuer: letsencrypt
     nginx.ingress.kubernetes.io/server-snippet: |      
       location "/discovery/mecsys-blackbox-http" {        
-        add_header Content-Type application/json;
+        add_header "Content-Type" "application/json";
         return 200 '[
            {
             "targets": [
@@ -283,7 +283,7 @@ ingress:
         ]';
       }
       location "/discovery/mecsys-blackbox-icmp" {        
-        add_header Content-Type application/json;
+        add_header "Content-Type" "application/json";
         return 200 '[
            {
             "targets": [
