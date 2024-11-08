@@ -303,7 +303,11 @@ ingress:
     - host: prober.mecsys.com.br
       paths:
         - path: /
-          pathType: ImplementationSpecific        
+          pathType: ImplementationSpecific
+        - path: /discovery/mecsys-blackbox-http
+          pathType: ImplementationSpecific
+        - path: /discovery/mecsys-blackbox-icmp
+          pathType: ImplementationSpecific
   tls:
     - secretName: prober-mecsys-com-br-tls
       hosts:
