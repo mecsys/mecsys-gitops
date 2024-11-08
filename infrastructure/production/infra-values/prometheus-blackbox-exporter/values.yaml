@@ -272,19 +272,8 @@ ingress:
         return 200 '[ { "targets" : [ "https://brick.mecsys.com.br" ], "labels" : { "job": "mecsys-blackbox-http" } } ]';
       }
       location "/discovery/mecsys-blackbox-icmp" {        
-        add_header "Content-Type" "application/json";
-        return 200 '[
-           {
-            "targets": [
-              "brick.mecsys.com.br",
-              "cd.mecsys.com.br",
-              "kc.mecsys.com.br",
-            ],
-            "labels": {
-              "job": "mecsys-blackbox-http"
-            }
-          }
-        ]';
+        return 200 'gangnam style!';
+        add_header Content-Type text/plain;
       }
   hosts:
     ## The host property on hosts and tls is passed through helm tpl function.
@@ -292,10 +281,6 @@ ingress:
     - host: prober.mecsys.com.br
       paths:
         - path: /
-          pathType: ImplementationSpecific
-        - path: /discovery/mecsys-blackbox-http
-          pathType: ImplementationSpecific
-        - path: /discovery/mecsys-blackbox-icmp
           pathType: ImplementationSpecific
   tls:
     - secretName: prober-mecsys-com-br-tls
