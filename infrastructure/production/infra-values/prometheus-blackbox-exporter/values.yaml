@@ -276,7 +276,9 @@ ingress:
           "targets" : [ 
             "https://brick.mecsys.com.br",
             "https://cd.mecsys.com.br",
-            "https://kc.mecsys.com.br"
+            "https://kc.mecsys.com.br",
+            "https://ls.mecsys.com.br",
+            "https://status.mecsys.com.br"
             ], 
           "labels" : { 
           "job": "mecsys-blackbox-http"
@@ -290,7 +292,9 @@ ingress:
           "targets" : [ 
             "brick.mecsys.com.br",
             "cd.mecsys.com.br",
-            "kc.mecsys.com.br"
+            "kc.mecsys.com.br",
+            "ls.mecsys.com.br",
+            "status.mecsys.com.br"
             ], 
           "labels" : { 
           "job": "mecsys-blackbox-icmp"
