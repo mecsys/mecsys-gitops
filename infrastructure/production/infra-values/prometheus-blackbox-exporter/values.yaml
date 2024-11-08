@@ -267,7 +267,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
     cert-manager.io/cluster-issuer: letsencrypt
     nginx.ingress.kubernetes.io/server-snippet: |      
-      location "^/discovery/mecsys-blackbox-http" {        
+      location "/discovery/mecsys-blackbox-http" {        
         add_header Content-Type application/json;
         return 200 '[
            {
@@ -282,7 +282,7 @@ ingress:
           }
         ]';
       }
-      location "^/discovery/mecsys-blackbox-icmp" {        
+      location "/discovery/mecsys-blackbox-icmp" {        
         add_header Content-Type application/json;
         return 200 '[
            {
