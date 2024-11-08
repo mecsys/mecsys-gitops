@@ -1,0 +1,12 @@
+[
+  {
+    "targets": [
+      "brick.mecsys.com.br",
+      "cd.mecsys.com.br",
+      "kc.mecsys.com.br",
+    ],
+    "labels": {
+      "job": "mecsys-blackbox-icmp"
+    }
+  }
+]
