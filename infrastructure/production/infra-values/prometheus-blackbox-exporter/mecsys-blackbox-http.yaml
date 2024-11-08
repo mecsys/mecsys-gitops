@@ -1,4 +1,4 @@
-{
+[
   {
     "targets": [
       "brick.mecsys.com.br",
@@ -9,4 +9,4 @@
       "job": "mecsys-blackbox-http"
     }
   }
-}
+]
