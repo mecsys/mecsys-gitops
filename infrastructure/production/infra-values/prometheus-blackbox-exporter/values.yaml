@@ -298,8 +298,7 @@ ingress:
             "alias.open-finance.sensedia.net",
             "alias-opin-addon.sensedia.net",
             "alias.open-finance-pcm.sensedia.net",
-            "alias.open-insurance-pcm.sensedia.net",
-            "",
+            "alias.open-insurance-pcm.sensedia.net"            
             ], 
           "labels" : { 
             "job": "mecsys-blackbox-icmp"
