@@ -112,8 +112,10 @@ image:
   # pullSecrets:
   #   - myRegistrKeySecretName
 
-podSecurityContext: {}
-# fsGroup: 1000
+podSecurityContext:
+  sysctls:
+  - name: net.ipv4.ping_group_range
+    value: "0 65536"
 
 ## User and Group to run blackbox-exporter container as
 securityContext:
