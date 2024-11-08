@@ -279,7 +279,7 @@ ingress:
             "https://status.mecsys.com.br"
             ], 
           "labels" : { 
-          "job": "mecsys-blackbox-http"
+            "job": "mecsys-blackbox-http"
           } 
         }]';
       }
@@ -295,7 +295,7 @@ ingress:
             "status.mecsys.com.br"
             ], 
           "labels" : { 
-          "job": "mecsys-blackbox-icmp"
+            "job": "mecsys-blackbox-icmp"
           } 
         }]';
       }
