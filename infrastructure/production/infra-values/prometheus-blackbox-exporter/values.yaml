@@ -267,20 +267,9 @@ ingress:
     # kubernetes.io/tls-acme: "true"
     cert-manager.io/cluster-issuer: letsencrypt
     nginx.ingress.kubernetes.io/server-snippet: |      
-      location "/discovery/mecsys-blackbox-http" {        
+      location ~* /discovery/mecsys-blackbox-http {
         add_header "Content-Type" "application/json";
-        return 200 '[
-           {
-            "targets": [
-              "https://brick.mecsys.com.br",
-              "https://cd.mecsys.com.br",
-              "https://kc.mecsys.com.br",
-            ],
-            "labels": {
-              "job": "mecsys-blackbox-http"
-            }
-          }
-        ]';
+        return 200 '[ { "targets" : [ "https://brick.mecsys.com.br" ], "labels" : { "job": "mecsys-blackbox-http" } } ]';
       }
       location "/discovery/mecsys-blackbox-icmp" {        
         add_header "Content-Type" "application/json";
