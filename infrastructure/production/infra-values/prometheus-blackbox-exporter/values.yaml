@@ -266,13 +266,29 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
     cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/server-snippet: |      
+      location "^/discovery/mecsys-blackbox-http" {        
+        add_header Content-Type application/json;
+        return 200 '[
+           {
+            "targets": [
+              "brick.mecsys.com.br",
+              "cd.mecsys.com.br",
+              "kc.mecsys.com.br",
+            ],
+            "labels": {
+              "job": "mecsys-blackbox-http"
+            }
+          }
+        ]';
+      }
   hosts:
     ## The host property on hosts and tls is passed through helm tpl function.
     ## ref: https://helm.sh/docs/developing_charts/#using-the-tpl-function
     - host: prober.mecsys.com.br
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: ImplementationSpecific        
   tls:
     - secretName: prober-mecsys-com-br-tls
       hosts:
