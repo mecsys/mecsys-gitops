@@ -392,7 +392,7 @@ serviceMonitor:
 #      additionalMetricsRelabels: {}    # Map of metric labels and values to add
 #      additionalRelabeling: []         # List of metric relabeling actions to run
     - name: brick.mecsys.com.br
-      url: https://brick.mecsys.com.br
+      url: prober.mecsys.com.br:443
 
 ## Custom PrometheusRules to be defined
 ## ref: https://github.com/coreos/prometheus-operator#customresourcedefinitions
