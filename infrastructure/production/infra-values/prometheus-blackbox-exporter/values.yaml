@@ -349,7 +349,8 @@ serviceMonitor:
     enabled: true
     additionalMetricsRelabels: {}
     additionalRelabeling: []
-    labels: {}
+    labels:
+      release: monitoring
     path: /metrics
     scheme: http
     tlsConfig: {}
@@ -367,7 +368,8 @@ serviceMonitor:
   defaults:
     additionalMetricsRelabels: {}
     additionalRelabeling: []
-    labels: {}
+    labels:
+      release: monitoring
     interval: 30s
     scrapeTimeout: 30s
     honorTimestamps: true
