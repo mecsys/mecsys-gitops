@@ -346,7 +346,7 @@ serviceMonitor:
   ## https://github.com/coreos/prometheus-operator for blackbox-exporter itself
   ##
   selfMonitor:
-    enabled: false
+    enabled: true
     additionalMetricsRelabels: {}
     additionalRelabeling: []
     labels: {}
@@ -361,7 +361,7 @@ serviceMonitor:
   ## If true, a ServiceMonitor CRD is created for a prometheus operator
   ## https://github.com/coreos/prometheus-operator for each target
   ##
-  enabled: false
+  enabled: true
 
   # Default values that will be used for all ServiceMonitors created by `targets`
   defaults:
@@ -391,6 +391,8 @@ serviceMonitor:
 #      module: http_2xx                 # Module used for scraping. Overrides value set in `defaults`
 #      additionalMetricsRelabels: {}    # Map of metric labels and values to add
 #      additionalRelabeling: []         # List of metric relabeling actions to run
+    - name: https://brick.mecsys.com.br
+      url: https://brick.mecsys.com.br
 
 ## Custom PrometheusRules to be defined
 ## ref: https://github.com/coreos/prometheus-operator#customresourcedefinitions
