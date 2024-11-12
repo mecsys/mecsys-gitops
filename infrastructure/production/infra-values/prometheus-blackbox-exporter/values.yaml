@@ -462,7 +462,7 @@ dnsPolicy:
 dnsConfig:
 
 # Extra manifests to deploy as an array
-extraManifests: []
+extraManifests:
   # - apiVersion: v1
   #   kind: ConfigMap
   #   metadata:
@@ -470,6 +470,39 @@ extraManifests: []
   #     name: prometheus-extra
   #   data:
   #     extra-data: "value"
+  - apiVersion: monitoring.coreos.com/v1alpha1
+    kind: ScrapeConfig
+    metadata:
+      annotations: {}
+      labels:
+        release: monitoring
+      name: mecsys-blackbox-http
+      namespace: monitoring
+    spec:
+      scrapeInterval: 1m
+      scrapeTimeout: 10s
+      scheme: HTTP
+      metricsPath: /probe
+      params:
+        module:
+          - http_2xx
+      relabelings:
+        - action: replace
+          sourceLabels:
+            - __address__
+          targetLabel: __param_target
+        - action: replace
+          sourceLabels:
+            - __param_target
+          targetLabel: instance
+        - action: replace
+          replacement: monitoring-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
+          targetLabel: __address__
+      staticConfigs:
+        - labels:
+            job: mecsys-blackbox-http
+          targets:
+            - https://brick.mecsys.com.br
 
 # global common labels, applied to all ressources
 commonLabels: {}
