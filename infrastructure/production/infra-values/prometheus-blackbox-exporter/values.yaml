@@ -339,7 +339,7 @@ pod:
 extraArgs: []
   # - --history.limit=1000
 
-replicas: 1
+replicas: 2
 
 serviceMonitor:
   ## If true, a ServiceMonitor CRD is created for a prometheus operator
