@@ -2174,7 +2174,7 @@ kube-state-metrics:
       #   action: replace
 
   selfMonitor:
-    enabled: false
+    enabled: true
 
 ## Deploy node exporter as a daemonset to all nodes
 ##
@@ -2784,7 +2784,7 @@ prometheusOperator:
   serviceMonitor:
     ## If true, create a serviceMonitor for prometheus operator
     ##
-    selfMonitor: false
+    selfMonitor: true
 
     ## Labels for ServiceMonitor
     additionalLabels: {}
