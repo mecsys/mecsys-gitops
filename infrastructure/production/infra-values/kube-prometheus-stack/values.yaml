@@ -2105,7 +2105,7 @@ kubeProxy:
 ## Component scraping kube state metrics
 ##
 kubeStateMetrics:
-  enabled: false
+  enabled: true
 
 ## Configuration for kube-state-metrics subchart
 ##
@@ -2179,18 +2179,18 @@ kube-state-metrics:
 ## Deploy node exporter as a daemonset to all nodes
 ##
 nodeExporter:
-  enabled: false
+  enabled: true
   operatingSystems:
     linux:
       enabled: true
     aix:
-      enabled: true
+      enabled: false
     darwin:
-      enabled: true
+      enabled: false
 
   ## ForceDeployDashboard Create dashboard configmap even if nodeExporter deployment has been disabled
   ##
-  forceDeployDashboards: false
+  forceDeployDashboards: true
 
 ## Configuration for prometheus-node-exporter subchart
 ##
@@ -3032,7 +3032,7 @@ prometheus:
   ## Note many of features described below (e.g. rules, query, alerting, remote read, thanos) will not work in agent mode.
   ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/designs/prometheus-agent.md
   ##
-  agentMode: false
+  agentMode: true
 
   ## Annotations for Prometheus
   ##
@@ -3466,7 +3466,7 @@ prometheus:
   serviceMonitor:
     ## If true, create a serviceMonitor for prometheus
     ##
-    selfMonitor: false
+    selfMonitor: true
 
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
@@ -3834,7 +3834,7 @@ prometheus:
 
     ## How long to retain metrics
     ##
-    retention: 10d
+    retention: 7d
 
     ## Maximum size of metrics
     ##
@@ -3843,7 +3843,7 @@ prometheus:
     ## Allow out-of-order/out-of-bounds samples ingested into Prometheus for a specified duration
     ## See https://prometheus.io/docs/prometheus/latest/configuration/configuration/#tsdb
     tsdb:
-      outOfOrderTimeWindow: 0s
+      outOfOrderTimeWindow: 300s
 
     ## Enable compression of the write-ahead log using Snappy.
     ##
@@ -4966,7 +4966,7 @@ thanosRuler:
 
 ## Setting to true produces cleaner resource names, but requires a data migration because the name of the persistent volume changes. Therefore this should only be set once on initial installation.
 ##
-cleanPrometheusOperatorObjectNames: false
+cleanPrometheusOperatorObjectNames: true
 
 ## Extra manifests to deploy as an array
 extraManifests: []
