@@ -96,8 +96,8 @@ controller:
       memory: "256Mi"
       cpu: "100m"
     limits:
-      memory: "768Mi"
-      cpu: "200m"
+      memory: "1Gi"
+      cpu: "500m"
   containerSecurityContext:
     allowPrivilegeEscalation: false
     capabilities:
