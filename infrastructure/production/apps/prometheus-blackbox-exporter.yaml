@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: production-prometheus-blackbox-exporter
+  namespace: argo-cd
+  annotations:
+    notifications.argoproj.io/subscribe.on-deployed.slack_webhook_openx: '#gitops-new-industries'
+    notifications.argoproj.io/subscribe.on-health-degraded.slack_webhook_openx: '#gitops-new-industries'
+    notifications.argoproj.io/subscribe.on-sync-failed.slack_webhook_openx: '#gitops-new-industries'
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack_webhook_openx: '#gitops-new-industries'
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: infra
+  sources:
+    - chart: prometheus-blackbox-exporter
+      repoURL: https://prometheus-community.github.io/helm-charts
+      targetRevision: 9.1.0
+      helm:
+        releaseName: monitoring
+        valueFiles:
+          - $values/infrastructure/production/infra-values/prometheus-blackbox-exporter/values.yaml
+    - ref: values
+      repoURL: git@github.com:mecsys/mecsys-gitops.git
+      targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true      
