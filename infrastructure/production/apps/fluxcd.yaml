@@ -16,7 +16,7 @@ spec:
   sources:
     - chart: flux2
       repoURL: https://fluxcd-community.github.io/helm-charts
-      targetRevision: 2.12.4
+      targetRevision: 2.14.0
       helm:
         releaseName: flux-cd
         valueFiles:
