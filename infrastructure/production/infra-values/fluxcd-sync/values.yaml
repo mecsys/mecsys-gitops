@@ -34,7 +34,7 @@ gitRepository:
     # For SSH repositories the secret must contain identity, identity.pub and known_hosts fields.
     # If a secret.create is set, it will point to that one.
     secretRef:
-      fluxcd-git-creds
+      secret: fluxcd-git-creds
 
     # -- The interval at which to check for repository updates.
     interval: 5m
