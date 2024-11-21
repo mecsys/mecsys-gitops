@@ -1,6 +1,6 @@
 secret:
   # -- Create a secret for the git repository. Defaults to false.
-  create: false
+  create: true
 
   # -- Data of the secret.
   # For HTTPS repositories the secret must contain username and password fields.
