@@ -1,6 +1,6 @@
 # global
 
-installCRDs: false
+installCRDs: true
 crds:
   # -- Add annotations to all CRD resources, e.g. "helm.sh/resource-policy": keep
   annotations: {}
