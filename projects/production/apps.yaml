@@ -17,5 +17,6 @@ spec:
   sourceRepos:
   - 'git@github.com:mecsys/mecsys-stacks.git'
   - 'https://charts.bitnami.com/bitnami'
+  - 'https://codecentric.github.io/helm-charts'
   - 'https://dirsigler.github.io/uptime-kuma-helm'
   
