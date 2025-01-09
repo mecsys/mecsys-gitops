@@ -15,7 +15,7 @@ spec:
   project: apps
   sources:
     - chart: mysql
-      repoURL: https://charts.bitnami.com/bitnami
+      repoURL: registry-1.docker.io/bitnamicharts/mysql
       targetRevision: 12.2.1
       helm:
         releaseName: mysql
