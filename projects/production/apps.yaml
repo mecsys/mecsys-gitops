@@ -17,7 +17,7 @@ spec:
   sourceRepos:
   - 'git@github.com:mecsys/mecsys-stacks.git'
   - 'https://charts.bitnami.com/bitnami'
-  - 'registry-1.docker.io/bitnamicharts/mysql'
+  - 'registry-1.docker.io/bitnamicharts'
   - 'https://codecentric.github.io/helm-charts'
   - 'https://dirsigler.github.io/uptime-kuma-helm'
   
