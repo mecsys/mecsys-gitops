@@ -42,3 +42,4 @@ spec:
   - 'https://schwarzit.github.io/node-red-chart'
   - 'https://prometheus-community.github.io/helm-charts'
   - 'https://kubernetes-sigs.github.io/metrics-server'
+  - 'https://kedacore.github.io/charts'

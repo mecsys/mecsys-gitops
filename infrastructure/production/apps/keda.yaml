@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: node-red
-  namespace: argo-cd
+  name: keda
+  namespace: argocd
   annotations:
     notifications.argoproj.io/subscribe.on-deployed.slack_webhook_openx: '#gitops-new-industries'
     notifications.argoproj.io/subscribe.on-health-degraded.slack_webhook_openx: '#gitops-new-industries'
@@ -10,17 +10,17 @@ metadata:
     notifications.argoproj.io/subscribe.on-sync-succeeded.slack_webhook_openx: '#gitops-new-industries'
 spec:
   destination:
-    namespace: node-red
+    namespace: keda
     server: https://kubernetes.default.svc
   project: infra
   sources:
-    - chart: node-red
-      repoURL: https://schwarzit.github.io/node-red-chart
-      targetRevision: 0.32.1
+    - chart: keda
+      repoURL: https://kedacore.github.io/charts
+      targetRevision: 2.13.1
       helm:
-        releaseName: node-red
+        releaseName: keda
         valueFiles:
-          - $values/infrastructure/production/infra-values/node-red/values.yaml
+          - $values/infrastructure/production/infra-values/keda/values.yaml
     - ref: values
       repoURL: git@github.com:mecsys/mecsys-gitops.git
       targetRevision: main
@@ -30,3 +30,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
