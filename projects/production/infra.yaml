@@ -45,4 +45,4 @@ spec:
   - 'https://prometheus-community.github.io/helm-charts'
   - 'https://kubernetes-sigs.github.io/metrics-server'
   - 'https://fluxcd-community.github.io/helm-charts'
-  - 'https://kedacore.github.io/charts 
+  - 'https://kedacore.github.io/charts'
